@@ -1,0 +1,241 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="pipitos.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/toastr.css" rel="stylesheet"/>
+    <link href="Content/sweetalert.css" rel="stylesheet"/>
+
+    <%--vamnos a agregar css de la plantilla SBADMIN--%>
+    <link href="sbadmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="Content/sbadmin/sb-admin.css" rel="stylesheet">
+
+    <link href="Content/Site.css" rel="stylesheet"/>
+
+     <%--<script src="sbadmin/vendor/jquery/jquery.min.js"></script>--%>
+     <script src='<%= ResolveUrl("sbadmin/vendor/jquery/jquery.min.js") %>'></script>
+     <script src='<%= ResolveUrl("sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js") %>'></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src='<%= ResolveUrl("sbadmin/vendor/jquery-easing/jquery.easing.min.js") %>'></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src='<%= ResolveUrl("sbadmin/vendor/datatables/jquery.dataTables.js") %>'></script>
+    <script src='<%= ResolveUrl("sbadmin/vendor/datatables/dataTables.bootstrap4.js") %>'></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src='<%= ResolveUrl("Scripts/sbadmin/sb-admin.min.js") %>'></script>
+
+</head>
+<body id="page-top">
+    <form runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <%--<asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />--%>
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <%--<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Nombre de la aplicación</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Inicio</a></li>
+                        <li><a runat="server" href="~/About">Acerca de</a></li>
+                        <li><a runat="server" href="~/Contact">Contacto</a></li>
+                    </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register">Registrarse</a></li>
+                                <li><a runat="server" href="~/Account/Login">Iniciar sesión</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/catalogos/Rutas/Index.aspx">Rutas</a></li>
+                                <li><a runat="server" href="~/catalogos/Contacto/Index.aspx">Contacto</a></li>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>--%>
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+          <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+
+          <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Navbar Search -->
+          <%--<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>--%>
+
+          <!-- Navbar -->
+          <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <span class="badge badge-danger">9+</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <span class="badge badge-danger">7</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle fa-fw"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="#">Activity Log</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+              </div>
+            </li>
+          </ul>
+    </nav>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul class="sidebar navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    </a>
+                </li>
+                <%--<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">Login Screens:</h6>
+                    <a class="dropdown-item" href="login.html">Login</a>
+                    <a class="dropdown-item" href="register.html">Register</a>
+                    <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Other Pages:</h6>
+                    <a class="dropdown-item" href="404.html">404 Page</a>
+                    <a class="dropdown-item" href="blank.html">Blank Page</a>
+                    </div>
+                </li>--%>
+                <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <AnonymousTemplate>
+                        <li class="nav-item"><a runat="server" href="~/Account/Register">Registrarse</a></li>
+                        <li class="nav-item"><a runat="server" href="~/Account/Login">Iniciar sesión</a></li>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                            <li class="nav-item">
+                                <a class="nav-link" runat="server" href="~/Account/Manage" title="Manage your account"><%: Context.User.Identity.GetUserName()  %></a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" runat="server" href="catalogos/Rutas/Index.aspx">
+                                    <span>Rutas</span>
+                                </a>
+                            </li>
+                            <li class="nav-item"> 
+                                <a class="nav-link" runat="server" href="catalogos/Contacto/index.aspx">
+                                    <span>Contacto</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" class="nav-link" LogoutText="Salir" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                            </li>
+                            <%--<li><a runat="server" href="~/catalogos/Rutas/Index.aspx">Rutas</a></li>
+                            <li><a runat="server" href="~/catalogos/Contacto/Index.aspx">Contacto</a></li>
+                            <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                            <li>
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                            </li>--%>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </ul>
+
+            <div id="content-wrapper">
+                <div class="container-fluid">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <%--<hr />--%>
+                    <%--<footer>
+                        <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                    </footer>--%>
+                    <!-- Sticky Footer -->
+                    <footer class="sticky-footer">
+                        <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © Your Website 2018</span>
+                        </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+          <i class="fas fa-angle-up"></i>
+        </a>
+    </form>
+</body>
+</html>

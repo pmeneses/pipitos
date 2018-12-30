@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pipitosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="contacto">
+    <Key>
+      <PropertyRef Name="id_contacto" />
+    </Key>
+    <Property Name="id_contacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_contacto" Type="varchar" MaxLength="50" />
+    <Property Name="num_telefono" Type="varchar" MaxLength="15" />
+    <Property Name="correo_electronico" Type="varchar" MaxLength="30" />
+    <Property Name="notas" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="rutas">
+    <Key>
+      <PropertyRef Name="id_ruta" />
+    </Key>
+    <Property Name="id_ruta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_ruta" Type="varchar" MaxLength="50" />
+    <Property Name="barrio" Type="varchar" MaxLength="50" />
+    <Property Name="distrito" Type="varchar" MaxLength="5" />
+    <Property Name="municipio" Type="varchar" MaxLength="20" />
+    <Property Name="departamento" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="pipitosModelStoreContainer">
+    <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

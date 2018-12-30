@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pipitosModelStoreContainer" CdmEntityContainer="pipitosEntities">
+    <EntitySetMapping Name="rutas">
+      <EntityTypeMapping TypeName="pipitosModel.rutas">
+        <MappingFragment StoreEntitySet="rutas">
+          <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+          <ScalarProperty Name="nombre_ruta" ColumnName="nombre_ruta" />
+          <ScalarProperty Name="barrio" ColumnName="barrio" />
+          <ScalarProperty Name="distrito" ColumnName="distrito" />
+          <ScalarProperty Name="municipio" ColumnName="municipio" />
+          <ScalarProperty Name="departamento" ColumnName="departamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contacto">
+      <EntityTypeMapping TypeName="pipitosModel.contacto">
+        <MappingFragment StoreEntitySet="contacto">
+          <ScalarProperty Name="notas" ColumnName="notas" />
+          <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+          <ScalarProperty Name="num_telefono" ColumnName="num_telefono" />
+          <ScalarProperty Name="nombre_contacto" ColumnName="nombre_contacto" />
+          <ScalarProperty Name="id_contacto" ColumnName="id_contacto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
