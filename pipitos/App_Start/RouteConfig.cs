@@ -11,9 +11,9 @@ namespace pipitos
         public static void RegisterRoutes(RouteCollection routes)
         {
             var settings = new FriendlyUrlSettings();
-            settings.AutoRedirectMode = RedirectMode.Permanent;
-            routes.EnableFriendlyUrls(settings);
+            //settings.AutoRedirectMode = RedirectMode.Permanent;
             settings.AutoRedirectMode = RedirectMode.Off;
+            routes.EnableFriendlyUrls(settings);
         }
     }
 }

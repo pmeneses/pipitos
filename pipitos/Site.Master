@@ -38,10 +38,16 @@
     <!-- Custom scripts for all pages-->
     <script src='<%= ResolveUrl("Scripts/sbadmin/sb-admin.min.js") %>'></script>
 
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+
 </head>
 <body id="page-top">
     <form runat="server">
-        <asp:ScriptManager runat="server" EnablePageMethods="true">
+        <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
