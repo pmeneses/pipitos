@@ -7,6 +7,37 @@
     <script src="../../Scripts/toastr.js"></script>
     <%--sweetalert libreria para notificaiones en cual el usario interectua, mensaje que cubre toda la pantalla--%>
     <script src="../../Scripts/sweetalert.js"></script>
+    <script>
+        $(document).ready(function () {
+    $('[id*=gvcontacto]').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+        "bDestroy": true,
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+});
+    </script>
     
      <ol class="breadcrumb">
 	    <li class="breadcrumb-item">
@@ -18,22 +49,16 @@
     <div class="card">
         <div class="card-body">
             <div class="row" style="margin-bottom:10px;">
-                <asp:Button runat="server" ID="btnNewContacto" cssclass="btn btn-primary btn-lg btn-block" OnClick="btnNewContact_Click"  Text="Agrega Contacto"></asp:Button>
+                <%--<asp:Button runat="server" ID="btnNewContacto" cssclass="btn btn-primary btn-lg btn-block" OnClick="btnNewContact_Click"  Text="Agrega Contacto"></asp:Button>--%>
+                  <asp:LinkButton runat="server" id="btnNewContacto" OnClick="btnNewContact_Click" 
+                        class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Agregar
+                    </asp:LinkButton>
             </div>
             <div class="row">
-                <asp:GridView runat="server">
-
-                </asp:GridView>
-                <div class="table-responsive">
-                <asp:GridView CssClass="table table-hover table-sm"
+                <div class="col-md-12">
+                    <asp:GridView CssClass="table table-hover table-sm" ClientIDMode= Static
                  runat="server" ID="gvcontacto" BorderColor="Transparent" AutoGenerateColumns="false" DataKeyNames="idcontacto">
-                    <HeaderStyle BackColor="#337ab7" ForeColor="White" />
-                    <RowStyle BorderColor ="#D8D8D8" Font-Size="Small" Height="20px" />
-                    <EmptyDataRowStyle forecolor="Red" CssClass="table table-bordered" />
-                    <emptydatatemplate>
-                        ¡No hay clientes seleccionados!  
-                    </emptydatatemplate>  
-
                     <Columns>
                         <asp:BoundField ReadOnly="True" HeaderText="Nombre Contacto" 
                           InsertVisible="False" DataField="Nombre"
@@ -61,7 +86,8 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-            </div>
+                </div>
+                
             </div>
         </div>
     </div>
