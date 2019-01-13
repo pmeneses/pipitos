@@ -10,10 +10,40 @@
     <Property Name="distrito" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="municipio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="departamento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="planificar_donante" Relationship="pipitosModel.FK__planifica__id_do__173876EA" FromRole="rutas" ToRole="planificar_donante" />
+    <NavigationProperty Name="donante" Relationship="pipitosModel.FK__donante__id_ruta__2E1BDC42" FromRole="rutas" ToRole="donante" />
   </EntityType>
   <EntityContainer Name="pipitosEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="rutas" EntityType="Self.rutas" />
     <EntitySet Name="contacto" EntityType="pipitosModel.contacto" />
+    <EntitySet Name="comprobante_recoleccion" EntityType="pipitosModel.comprobante_recoleccion" />
+    <EntitySet Name="planificador_recoleccion" EntityType="pipitosModel.planificador_recoleccion" />
+    <EntitySet Name="planificar_donante" EntityType="pipitosModel.planificar_donante" />
+    <AssociationSet Name="FK__planifica__id_pl__182C9B23" Association="pipitosModel.FK__planifica__id_pl__182C9B23">
+      <End Role="planificador_recoleccion" EntitySet="planificador_recoleccion" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK__planifica__id_do__173876EA" Association="pipitosModel.FK__planifica__id_do__173876EA">
+      <End Role="rutas" EntitySet="rutas" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
+    <EntitySet Name="donante" EntityType="pipitosModel.donante" />
+    <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="pipitosModel.FK_comprobante_recoleccion_donante">
+      <End Role="donante" EntitySet="donante" />
+      <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="pipitosModel.FK__donante__id_cont__08EA5793">
+      <End Role="contacto" EntitySet="contacto" />
+      <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK__donante__id_ruta__2E1BDC42" Association="pipitosModel.FK__donante__id_ruta__2E1BDC42">
+      <End Role="rutas" EntitySet="rutas" />
+      <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_planificar_donante_donante" Association="pipitosModel.FK_planificar_donante_donante">
+      <End Role="donante" EntitySet="donante" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="contacto">
     <Key>
@@ -24,5 +54,136 @@
     <Property Name="num_telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="correo_electronico" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="notas" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="donante" Relationship="pipitosModel.FK__donante__id_cont__08EA5793" FromRole="contacto" ToRole="donante" />
   </EntityType>
+  <EntityType Name="comprobante_recoleccion">
+    <Key>
+      <PropertyRef Name="no_recibo" />
+    </Key>
+    <Property Name="no_recibo" Type="Int32" Nullable="false" />
+    <Property Name="recibimos_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="a_nombre_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="en_concepto_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="entregado_por" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="recibido_por" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_donante" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="donante" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="comprobante_recoleccion" ToRole="donante" />
+  </EntityType>
+  <EntityType Name="planificador_recoleccion">
+    <Key>
+      <PropertyRef Name="id_plan_rec" />
+    </Key>
+    <Property Name="id_plan_rec" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fechavisita" Type="DateTime" Precision="3" />
+    <Property Name="eliminada" Type="Boolean" />
+    <NavigationProperty Name="planificar_donante" Relationship="pipitosModel.FK__planifica__id_pl__182C9B23" FromRole="planificador_recoleccion" ToRole="planificar_donante" />
+  </EntityType>
+  <EntityType Name="planificar_donante">
+    <Key>
+      <PropertyRef Name="id_planificar_don" />
+    </Key>
+    <Property Name="id_planificar_don" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_donante" Type="Int32" Nullable="false" />
+    <Property Name="id_ruta" Type="Int32" Nullable="false" />
+    <Property Name="id_plan_rec" Type="Int32" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="visitarealizada" Type="Boolean" />
+    <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="planificador_recoleccion" Relationship="pipitosModel.FK__planifica__id_pl__182C9B23" FromRole="planificar_donante" ToRole="planificador_recoleccion" />
+    <NavigationProperty Name="rutas" Relationship="pipitosModel.FK__planifica__id_do__173876EA" FromRole="planificar_donante" ToRole="rutas" />
+    <NavigationProperty Name="donante" Relationship="pipitosModel.FK_planificar_donante_donante" FromRole="planificar_donante" ToRole="donante" />
+  </EntityType>
+  <Association Name="FK__planifica__id_pl__182C9B23">
+    <End Type="pipitosModel.planificador_recoleccion" Role="planificador_recoleccion" Multiplicity="1" />
+    <End Type="pipitosModel.planificar_donante" Role="planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="planificador_recoleccion">
+        <PropertyRef Name="id_plan_rec" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_plan_rec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__planifica__id_do__173876EA">
+    <End Type="pipitosModel.rutas" Role="rutas" Multiplicity="1" />
+    <End Type="pipitosModel.planificar_donante" Role="planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rutas">
+        <PropertyRef Name="id_ruta" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_ruta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="donante">
+    <Key>
+      <PropertyRef Name="id_donante" />
+    </Key>
+    <Property Name="id_donante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_contacto" Type="Int32" />
+    <Property Name="id_categoriadon" Type="Int32" />
+    <Property Name="fecha_ingreso" Type="DateTime" Precision="0" />
+    <Property Name="nombre_donante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="gerente" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="id_ruta" Type="Int32" />
+    <Property Name="periodicidad_donacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="donante" ToRole="comprobante_recoleccion" />
+    <NavigationProperty Name="contacto" Relationship="pipitosModel.FK__donante__id_cont__08EA5793" FromRole="donante" ToRole="contacto" />
+    <NavigationProperty Name="rutas" Relationship="pipitosModel.FK__donante__id_ruta__2E1BDC42" FromRole="donante" ToRole="rutas" />
+    <NavigationProperty Name="planificar_donante" Relationship="pipitosModel.FK_planificar_donante_donante" FromRole="donante" ToRole="planificar_donante" />
+  </EntityType>
+  <Association Name="FK_comprobante_recoleccion_donante">
+    <End Type="pipitosModel.donante" Role="donante" Multiplicity="1" />
+    <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donante">
+        <PropertyRef Name="id_donante" />
+      </Principal>
+      <Dependent Role="comprobante_recoleccion">
+        <PropertyRef Name="id_donante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__donante__id_cont__08EA5793">
+    <End Type="pipitosModel.contacto" Role="contacto" Multiplicity="0..1" />
+    <End Type="pipitosModel.donante" Role="donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="contacto">
+        <PropertyRef Name="id_contacto" />
+      </Principal>
+      <Dependent Role="donante">
+        <PropertyRef Name="id_contacto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__donante__id_ruta__2E1BDC42">
+    <End Type="pipitosModel.rutas" Role="rutas" Multiplicity="0..1" />
+    <End Type="pipitosModel.donante" Role="donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rutas">
+        <PropertyRef Name="id_ruta" />
+      </Principal>
+      <Dependent Role="donante">
+        <PropertyRef Name="id_ruta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_planificar_donante_donante">
+    <End Type="pipitosModel.donante" Role="donante" Multiplicity="1" />
+    <End Type="pipitosModel.planificar_donante" Role="planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donante">
+        <PropertyRef Name="id_donante" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_donante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

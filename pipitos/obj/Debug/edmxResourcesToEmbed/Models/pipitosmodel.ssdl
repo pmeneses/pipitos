@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="pipitosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="comprobante_recoleccion">
+    <Key>
+      <PropertyRef Name="no_recibo" />
+    </Key>
+    <Property Name="no_recibo" Type="int" Nullable="false" />
+    <Property Name="recibimos_de" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="a_nombre_de" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="en_concepto_de" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="entregado_por" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="recibido_por" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_donante" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="contacto">
     <Key>
       <PropertyRef Name="id_contacto" />
@@ -9,6 +22,42 @@
     <Property Name="num_telefono" Type="varchar" MaxLength="15" />
     <Property Name="correo_electronico" Type="varchar" MaxLength="30" />
     <Property Name="notas" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="donante">
+    <Key>
+      <PropertyRef Name="id_donante" />
+    </Key>
+    <Property Name="id_donante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_contacto" Type="int" />
+    <Property Name="id_categoriadon" Type="int" />
+    <Property Name="fecha_ingreso" Type="date" />
+    <Property Name="nombre_donante" Type="varchar" MaxLength="30" />
+    <Property Name="gerente" Type="varchar" MaxLength="30" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="75" />
+    <Property Name="id_ruta" Type="int" />
+    <Property Name="periodicidad_donacion" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="planificador_recoleccion">
+    <Key>
+      <PropertyRef Name="id_plan_rec" />
+    </Key>
+    <Property Name="id_plan_rec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="fechavisita" Type="datetime" />
+    <Property Name="eliminada" Type="bit" />
+  </EntityType>
+  <EntityType Name="planificar_donante">
+    <Key>
+      <PropertyRef Name="id_planificar_don" />
+    </Key>
+    <Property Name="id_planificar_don" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_donante" Type="int" Nullable="false" />
+    <Property Name="id_ruta" Type="int" Nullable="false" />
+    <Property Name="id_plan_rec" Type="int" Nullable="false" />
+    <Property Name="fecha_registro" Type="date" Nullable="false" />
+    <Property Name="visitarealizada" Type="bit" />
+    <Property Name="observaciones" Type="text" />
   </EntityType>
   <EntityType Name="rutas">
     <Key>
@@ -21,8 +70,108 @@
     <Property Name="municipio" Type="varchar" MaxLength="20" />
     <Property Name="departamento" Type="varchar" MaxLength="20" />
   </EntityType>
+  <Association Name="FK__donante__id_cont__08EA5793">
+    <End Role="contacto" Type="Self.contacto" Multiplicity="0..1" />
+    <End Role="donante" Type="Self.donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="contacto">
+        <PropertyRef Name="id_contacto" />
+      </Principal>
+      <Dependent Role="donante">
+        <PropertyRef Name="id_contacto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__donante__id_ruta__2E1BDC42">
+    <End Role="rutas" Type="Self.rutas" Multiplicity="0..1" />
+    <End Role="donante" Type="Self.donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rutas">
+        <PropertyRef Name="id_ruta" />
+      </Principal>
+      <Dependent Role="donante">
+        <PropertyRef Name="id_ruta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__planifica__id_do__173876EA">
+    <End Role="rutas" Type="Self.rutas" Multiplicity="1" />
+    <End Role="planificar_donante" Type="Self.planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rutas">
+        <PropertyRef Name="id_ruta" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_ruta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__planifica__id_pl__182C9B23">
+    <End Role="planificador_recoleccion" Type="Self.planificador_recoleccion" Multiplicity="1" />
+    <End Role="planificar_donante" Type="Self.planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="planificador_recoleccion">
+        <PropertyRef Name="id_plan_rec" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_plan_rec" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comprobante_recoleccion_donante">
+    <End Role="donante" Type="Self.donante" Multiplicity="1" />
+    <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donante">
+        <PropertyRef Name="id_donante" />
+      </Principal>
+      <Dependent Role="comprobante_recoleccion">
+        <PropertyRef Name="id_donante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_planificar_donante_donante">
+    <End Role="donante" Type="Self.donante" Multiplicity="1" />
+    <End Role="planificar_donante" Type="Self.planificar_donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donante">
+        <PropertyRef Name="id_donante" />
+      </Principal>
+      <Dependent Role="planificar_donante">
+        <PropertyRef Name="id_donante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="pipitosModelStoreContainer">
+    <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="planificador_recoleccion" EntityType="Self.planificador_recoleccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="planificar_donante" EntityType="Self.planificar_donante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
+      <End Role="contacto" EntitySet="contacto" />
+      <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK__donante__id_ruta__2E1BDC42" Association="Self.FK__donante__id_ruta__2E1BDC42">
+      <End Role="rutas" EntitySet="rutas" />
+      <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK__planifica__id_do__173876EA" Association="Self.FK__planifica__id_do__173876EA">
+      <End Role="rutas" EntitySet="rutas" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK__planifica__id_pl__182C9B23" Association="Self.FK__planifica__id_pl__182C9B23">
+      <End Role="planificador_recoleccion" EntitySet="planificador_recoleccion" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
+      <End Role="donante" EntitySet="donante" />
+      <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_planificar_donante_donante" Association="Self.FK_planificar_donante_donante">
+      <End Role="donante" EntitySet="donante" />
+      <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
