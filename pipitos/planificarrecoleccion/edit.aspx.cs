@@ -228,13 +228,14 @@ namespace pipitos.planificarrecoleccion
                 limpiarcamposdetalle();
                 cbdonantes.Focus();
 
-                this.Session["mensaje"] = new modulo.mensaje
+                var m = new modulo.mensaje
                 {
                     texto = "Registro Guardado exitosamente",
                     tipo = "success"
                 };
-                //Response.Redirect(Request.Url.AbsoluteUri);
-                //vamos a regrescar el grid
+
+                modulo.ShowToastr(this, m.texto, "Sistema", m.tipo);
+                
                 cargardetalleplanificacion(int.Parse(idplanificacion.Value));
             }
             catch (Exception ex)
