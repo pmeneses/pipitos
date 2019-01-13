@@ -59,13 +59,15 @@
                                     <%--Botones de eliminar y editar cliente...--%>
                                     <asp:LinkButton ID="btnEdit" CommandName="Edit" runat="server" 
                                     CssClass="btn btn-outline-info btn-sm" CommandArgument='<%# Container.DataItemIndex %>'
-                                    OnCommand="btnEdit_Command">
-                                        <i class="far fa-edit"></i> Editar
+                                    OnCommand="btnEdit_Command" data-toggle="tooltip" data-placement="top" 
+                                        title="Editar">
+                                        <i class="far fa-edit"></i>
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="btnDelete" runat="server"  
                                     OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"Idruta") + ");" %>'
-                                    CssClass="btn btn-outline-danger btn-sm" >
-                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    CssClass="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" 
+                                        title="Eliminar" >
+                                        <i class="fas fa-trash-alt"></i>
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>

@@ -105,7 +105,7 @@
             </div>
         </div>--%>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-          <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+          <a class="navbar-brand mr-1" href="index.html">SICAP</a>
 
           <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
@@ -200,11 +200,18 @@
                                     <span>Rutas</span>
                                 </a>
                             </li>
+                        <li class="nav-item">
+                                <a class="nav-link" runat="server" href="~/planificarrecoleccion/index.aspx">
+                                    <span>Planificar Recoleccion</span>
+                                </a>
+                            </li>
+
                             <li class="nav-item"> 
                                 <a class="nav-link" runat="server" href="catalogos/Contacto/index.aspx">
                                     <span>Contacto</span>
                                 </a>
                             </li>
+                        
                             <li class="nav-item">
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" class="nav-link" LogoutText="Salir" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                             </li>

@@ -52,3 +52,11 @@ input[type="select"] {
     text-align:left;
     margin-left: 5px;
 }
+
+.sidebar {
+    background-color: #094A79;
+}
+
+.bg-dark {
+    background-color: #0160A1 !important;
+}
