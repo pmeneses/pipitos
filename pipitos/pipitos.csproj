@@ -155,6 +155,7 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="catalogos\Contacto\create.aspx" />
     <Content Include="catalogos\Contacto\index.aspx" />
+    <Content Include="catalogos\Contacto\update.aspx" />
     <Content Include="catalogos\Rutas\create.aspx" />
     <Content Include="catalogos\Rutas\Edit.aspx" />
     <Content Include="catalogos\Rutas\funciones.js" />
@@ -1850,6 +1851,13 @@
     </Compile>
     <Compile Include="catalogos\Contacto\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="catalogos\Contacto\update.aspx.cs">
+      <DependentUpon>update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="catalogos\Contacto\update.aspx.designer.cs">
+      <DependentUpon>update.aspx</DependentUpon>
     </Compile>
     <Compile Include="catalogos\Rutas\create.aspx.cs">
       <DependentUpon>create.aspx</DependentUpon>

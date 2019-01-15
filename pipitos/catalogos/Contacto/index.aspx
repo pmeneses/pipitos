@@ -78,10 +78,22 @@
                         <%--botones de acción sobre los registros...--%>
                         <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px">
                             <ItemTemplate>
-                                <%--Botones de eliminar y editar cliente...--%>
-                                <asp:Button ID="btnEdit" CommandName="Edit" runat="server" Text="Editar" 
-                                CssClass="btn btn-outline-info btn-sm" />
-                                <asp:Button ID="btnDelete" runat="server" Text="Eliminar" CssClass="btn btn-outline-danger btn-sm" />
+                                <%--Botones de eliminar y editar contacto...--%>
+
+                                <asp:linkButton ID="btnEdit" oncommand="btnEdit_Command" CommandName="Edit" runat="server" Text="Editar" 
+                                CssClass="btn btn-outline-info btn-sm" CommandArgument='<%# Container.DataItemIndex %>'
+                                    data-toggle="tooltip" data-placement="top" 
+                                        title="Editar">
+                                     <i class="far fa-edit"></i>
+                                </asp:linkbutton>
+                              
+                            <asp:LinkButton ID="btnDelete" runat="server"  
+                                    OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"idcontacto") + ");" %>'
+                                    CssClass="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" 
+                                        title="Eliminar">
+                                        <i class="fas fa-trash-alt"></i>
+                                </asp:LinkButton>
+
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
