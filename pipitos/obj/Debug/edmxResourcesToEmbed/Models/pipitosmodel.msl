@@ -61,10 +61,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="donante_categoria">
+      <EntityTypeMapping TypeName="pipitosModel.donante_categoria">
+        <MappingFragment StoreEntitySet="donante_categoria">
+          <ScalarProperty Name="tipo_donante" ColumnName="tipo_donante" />
+          <ScalarProperty Name="id_categoriadon" ColumnName="id_categoriadon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="periocidad">
+      <EntityTypeMapping TypeName="pipitosModel.periocidad">
+        <MappingFragment StoreEntitySet="periocidad">
+          <ScalarProperty Name="activa" ColumnName="activa" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idperiocidad" ColumnName="idperiocidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="donante">
       <EntityTypeMapping TypeName="pipitosModel.donante">
         <MappingFragment StoreEntitySet="donante">
-          <ScalarProperty Name="periodicidad_donacion" ColumnName="periodicidad_donacion" />
+          <ScalarProperty Name="idperiocidad" ColumnName="idperiocidad" />
           <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="estado" ColumnName="estado" />
