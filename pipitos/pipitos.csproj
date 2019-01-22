@@ -175,6 +175,7 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Donante\index.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
@@ -1901,6 +1902,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Donante\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Donante\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1913,7 +1921,13 @@
     <Compile Include="Models\donante.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\donante_categoria.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\periocidad.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pipitosmodel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

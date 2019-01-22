@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pipitos.planificarrecoleccion {
+namespace pipitos.Donante {
     
     
     public partial class index {
         
         /// <summary>
-        /// btnnewplanificacion control.
+        /// btnNewDonante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnnewplanificacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnNewDonante;
         
         /// <summary>
-        /// gvplanificaciones control.
+        /// gvdonante control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvplanificaciones;
+        protected global::System.Web.UI.WebControls.GridView gvdonante;
     }
 }

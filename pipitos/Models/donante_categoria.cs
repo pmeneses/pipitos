@@ -12,24 +12,17 @@ namespace pipitos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class rutas
+    public partial class donante_categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public rutas()
+        public donante_categoria()
         {
-            this.planificar_donante = new HashSet<planificar_donante>();
             this.donante = new HashSet<donante>();
         }
     
-        public int id_ruta { get; set; }
-        public string nombre_ruta { get; set; }
-        public string barrio { get; set; }
-        public string distrito { get; set; }
-        public string municipio { get; set; }
-        public string departamento { get; set; }
+        public int id_categoriadon { get; set; }
+        public string tipo_donante { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<planificar_donante> planificar_donante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<donante> donante { get; set; }
     }
