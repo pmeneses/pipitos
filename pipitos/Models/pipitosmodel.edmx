@@ -43,6 +43,15 @@
           <Property Name="id_ruta" Type="int" />
           <Property Name="periodicidad_donacion" Type="varchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="id_material" />
+          </Key>
+          <Property Name="id_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_material" Type="varchar" MaxLength="50" />
+          <Property Name="unidad_medida" Type="varchar" MaxLength="10" />
+          <Property Name="precio_unitario" Type="int" />
+        </EntityType>
         <EntityType Name="planificador_recoleccion">
           <Key>
             <PropertyRef Name="id_plan_rec" />
@@ -63,6 +72,16 @@
           <Property Name="fecha_registro" Type="date" Nullable="false" />
           <Property Name="visitarealizada" Type="bit" />
           <Property Name="observaciones" Type="text" />
+        </EntityType>
+        <EntityType Name="recolecta">
+          <Key>
+            <PropertyRef Name="id_recolecta" />
+          </Key>
+          <Property Name="id_recolecta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_recibo" Type="int" />
+          <Property Name="id_material" Type="int" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="rutas">
           <Key>
@@ -123,6 +142,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__recolecta__id_ma__21B6055D">
+          <End Role="material" Type="Self.material" Multiplicity="0..1" />
+          <End Role="recolecta" Type="Self.recolecta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="recolecta">
+              <PropertyRef Name="id_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__recolecta__no_re__20C1E124">
+          <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="0..1" />
+          <End Role="recolecta" Type="Self.recolecta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comprobante_recoleccion">
+              <PropertyRef Name="no_recibo" />
+            </Principal>
+            <Dependent Role="recolecta">
+              <PropertyRef Name="no_recibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_comprobante_recoleccion_donante">
           <End Role="donante" Type="Self.donante" Multiplicity="1" />
           <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="*" />
@@ -151,8 +194,10 @@
           <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planificador_recoleccion" EntityType="Self.planificador_recoleccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planificar_donante" EntityType="Self.planificar_donante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="recolecta" EntityType="Self.recolecta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
             <End Role="contacto" EntitySet="contacto" />
@@ -169,6 +214,14 @@
           <AssociationSet Name="FK__planifica__id_pl__182C9B23" Association="Self.FK__planifica__id_pl__182C9B23">
             <End Role="planificador_recoleccion" EntitySet="planificador_recoleccion" />
             <End Role="planificar_donante" EntitySet="planificar_donante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recolecta__id_ma__21B6055D" Association="Self.FK__recolecta__id_ma__21B6055D">
+            <End Role="material" EntitySet="material" />
+            <End Role="recolecta" EntitySet="recolecta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="Self.FK__recolecta__no_re__20C1E124">
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+            <End Role="recolecta" EntitySet="recolecta" />
           </AssociationSet>
           <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
             <End Role="donante" EntitySet="donante" />
@@ -227,6 +280,16 @@
             <End Role="donante" EntitySet="donante" />
             <End Role="planificar_donante" EntitySet="planificar_donante" />
           </AssociationSet>
+          <EntitySet Name="recolecta" EntityType="pipitosModel.recolecta" />
+          <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="pipitosModel.FK__recolecta__no_re__20C1E124">
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+            <End Role="recolecta" EntitySet="recolecta" />
+          </AssociationSet>
+          <EntitySet Name="material" EntityType="pipitosModel.material" />
+          <AssociationSet Name="FK__recolecta__id_ma__21B6055D" Association="pipitosModel.FK__recolecta__id_ma__21B6055D">
+            <End Role="material" EntitySet="material" />
+            <End Role="recolecta" EntitySet="recolecta" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="contacto">
           <Key>
@@ -252,6 +315,7 @@
           <Property Name="id_donante" Type="Int32" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="donante" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="comprobante_recoleccion" ToRole="donante" />
+          <NavigationProperty Name="recolecta" Relationship="pipitosModel.FK__recolecta__no_re__20C1E124" FromRole="comprobante_recoleccion" ToRole="recolecta" />
         </EntityType>
         <EntityType Name="planificador_recoleccion">
           <Key>
@@ -369,6 +433,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="recolecta">
+          <Key>
+            <PropertyRef Name="id_recolecta" />
+          </Key>
+          <Property Name="id_recolecta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_recibo" Type="Int32" />
+          <Property Name="id_material" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK__recolecta__no_re__20C1E124" FromRole="recolecta" ToRole="comprobante_recoleccion" />
+          <NavigationProperty Name="material" Relationship="pipitosModel.FK__recolecta__id_ma__21B6055D" FromRole="recolecta" ToRole="material" />
+        </EntityType>
+        <Association Name="FK__recolecta__no_re__20C1E124">
+          <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="0..1" />
+          <End Type="pipitosModel.recolecta" Role="recolecta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comprobante_recoleccion">
+              <PropertyRef Name="no_recibo" />
+            </Principal>
+            <Dependent Role="recolecta">
+              <PropertyRef Name="no_recibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="id_material" />
+          </Key>
+          <Property Name="id_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_material" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="unidad_medida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="precio_unitario" Type="Int32" />
+          <NavigationProperty Name="recolecta" Relationship="pipitosModel.FK__recolecta__id_ma__21B6055D" FromRole="material" ToRole="recolecta" />
+        </EntityType>
+        <Association Name="FK__recolecta__id_ma__21B6055D">
+          <End Type="pipitosModel.material" Role="material" Multiplicity="0..1" />
+          <End Type="pipitosModel.recolecta" Role="recolecta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="recolecta">
+              <PropertyRef Name="id_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -448,6 +558,27 @@
                 <ScalarProperty Name="id_categoriadon" ColumnName="id_categoriadon" />
                 <ScalarProperty Name="id_contacto" ColumnName="id_contacto" />
                 <ScalarProperty Name="id_donante" ColumnName="id_donante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="recolecta">
+            <EntityTypeMapping TypeName="pipitosModel.recolecta">
+              <MappingFragment StoreEntitySet="recolecta">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_material" ColumnName="id_material" />
+                <ScalarProperty Name="no_recibo" ColumnName="no_recibo" />
+                <ScalarProperty Name="id_recolecta" ColumnName="id_recolecta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="material">
+            <EntityTypeMapping TypeName="pipitosModel.material">
+              <MappingFragment StoreEntitySet="material">
+                <ScalarProperty Name="precio_unitario" ColumnName="precio_unitario" />
+                <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
+                <ScalarProperty Name="nombre_material" ColumnName="nombre_material" />
+                <ScalarProperty Name="id_material" ColumnName="id_material" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

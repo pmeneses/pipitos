@@ -60,3 +60,21 @@ input[type="select"] {
 .bg-dark {
     background-color: #0160A1 !important;
 }
+
+.Background {
+    background-color: Black;
+    filter: alpha(opacity=90);
+    opacity: 0.8;
+}
+
+.Popup {
+    background-color: #FFFFFF;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: gray;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 500px;
+    height: 500px;
+}  

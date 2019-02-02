@@ -31,5 +31,7 @@ namespace pipitos.Models
         public virtual DbSet<planificador_recoleccion> planificador_recoleccion { get; set; }
         public virtual DbSet<planificar_donante> planificar_donante { get; set; }
         public virtual DbSet<donante> donante { get; set; }
+        public virtual DbSet<recolecta> recolecta { get; set; }
+        public virtual DbSet<material> material { get; set; }
     }
 }

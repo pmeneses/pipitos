@@ -12,24 +12,19 @@ namespace pipitos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class comprobante_recoleccion
+    public partial class material
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public comprobante_recoleccion()
+        public material()
         {
             this.recolecta = new HashSet<recolecta>();
         }
     
-        public int no_recibo { get; set; }
-        public string recibimos_de { get; set; }
-        public string a_nombre_de { get; set; }
-        public string en_concepto_de { get; set; }
-        public string entregado_por { get; set; }
-        public string recibido_por { get; set; }
-        public int id_donante { get; set; }
-        public System.DateTime fecha { get; set; }
+        public int id_material { get; set; }
+        public string nombre_material { get; set; }
+        public string unidad_medida { get; set; }
+        public Nullable<int> precio_unitario { get; set; }
     
-        public virtual donante donante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<recolecta> recolecta { get; set; }
     }
