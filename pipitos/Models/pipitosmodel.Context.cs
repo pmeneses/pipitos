@@ -33,5 +33,6 @@ namespace pipitos.Models
         public virtual DbSet<donante_categoria> donante_categoria { get; set; }
         public virtual DbSet<periocidad> periocidad { get; set; }
         public virtual DbSet<donante> donante { get; set; }
+        public virtual DbSet<entidad> entidad { get; set; }
     }
 }

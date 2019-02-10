@@ -12,15 +12,17 @@
         <EntityTypeShape EntityType="pipitosModel.planificar_donante" Width="1.5" PointX="4.875" PointY="1.5" />
         <AssociationConnector Association="pipitosModel.FK__planifica__id_pl__182C9B23" />
         <AssociationConnector Association="pipitosModel.FK__planifica__id_do__173876EA" />
-        <EntityTypeShape EntityType="pipitosModel.donante_categoria" Width="1.5" PointX="12.5" PointY="0.75" />
-        <EntityTypeShape EntityType="pipitosModel.periocidad" Width="1.5" PointX="13.125" PointY="3.25" />
-        <EntityTypeShape EntityType="pipitosModel.donante" Width="1.5" PointX="9.875" PointY="1" />
+        <EntityTypeShape EntityType="pipitosModel.donante_categoria" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="pipitosModel.periocidad" Width="1.5" PointX="13.5" PointY="3.75" />
+        <EntityTypeShape EntityType="pipitosModel.donante" Width="1.5" PointX="9.5" PointY="0.875" />
+        <EntityTypeShape EntityType="pipitosModel.entidad" Width="1.5" PointX="12" PointY="0.75" />
         <AssociationConnector Association="pipitosModel.FK_comprobante_recoleccion_donante" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_cont__08EA5793" />
-        <AssociationConnector Association="pipitosModel.FK__donante__id_cate__09DE7BCC" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_ruta__2E1BDC42" />
+        <AssociationConnector Association="pipitosModel.FK_donante_entidad" />
         <AssociationConnector Association="pipitosModel.FK_donante_periocidad" />
         <AssociationConnector Association="pipitosModel.FK_planificar_donante_donante" />
+        <AssociationConnector Association="pipitosModel.FK_entidad_donante_categoria" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

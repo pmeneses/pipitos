@@ -34,7 +34,7 @@
           </Key>
           <Property Name="id_donante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_contacto" Type="int" Nullable="false" />
-          <Property Name="id_categoriadon" Type="int" Nullable="false" />
+          <Property Name="identidad" Type="int" Nullable="false" />
           <Property Name="fecha_ingreso" Type="date" Nullable="false" />
           <Property Name="nombre_donante" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="gerente" Type="varchar" MaxLength="30" Nullable="false" />
@@ -49,6 +49,15 @@
           </Key>
           <Property Name="id_categoriadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo_donante" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="entidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_categoriadon" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="periocidad">
           <Key>
@@ -90,18 +99,6 @@
           <Property Name="municipio" Type="varchar" MaxLength="20" />
           <Property Name="departamento" Type="varchar" MaxLength="20" />
         </EntityType>
-        <Association Name="FK__donante__id_cate__09DE7BCC">
-          <End Role="donante_categoria" Type="Self.donante_categoria" Multiplicity="1" />
-          <End Role="donante" Type="Self.donante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="donante_categoria">
-              <PropertyRef Name="id_categoriadon" />
-            </Principal>
-            <Dependent Role="donante">
-              <PropertyRef Name="id_categoriadon" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__donante__id_cont__08EA5793">
           <End Role="contacto" Type="Self.contacto" Multiplicity="1" />
           <End Role="donante" Type="Self.donante" Multiplicity="*" />
@@ -162,6 +159,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_donante_entidad">
+          <End Role="entidad" Type="Self.entidad" Multiplicity="1" />
+          <End Role="donante" Type="Self.donante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="donante">
+              <PropertyRef Name="identidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_donante_periocidad">
           <End Role="periocidad" Type="Self.periocidad" Multiplicity="1" />
           <End Role="donante" Type="Self.donante" Multiplicity="*" />
@@ -171,6 +180,18 @@
             </Principal>
             <Dependent Role="donante">
               <PropertyRef Name="idperiocidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entidad_donante_categoria">
+          <End Role="donante_categoria" Type="Self.donante_categoria" Multiplicity="1" />
+          <End Role="entidad" Type="Self.entidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donante_categoria">
+              <PropertyRef Name="id_categoriadon" />
+            </Principal>
+            <Dependent Role="entidad">
+              <PropertyRef Name="id_categoriadon" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -191,14 +212,11 @@
           <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="donante_categoria" EntityType="Self.donante_categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entidad" EntityType="Self.entidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="periocidad" EntityType="Self.periocidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planificador_recoleccion" EntityType="Self.planificador_recoleccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planificar_donante" EntityType="Self.planificar_donante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__donante__id_cate__09DE7BCC" Association="Self.FK__donante__id_cate__09DE7BCC">
-            <End Role="donante_categoria" EntitySet="donante_categoria" />
-            <End Role="donante" EntitySet="donante" />
-          </AssociationSet>
           <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
             <End Role="contacto" EntitySet="contacto" />
             <End Role="donante" EntitySet="donante" />
@@ -219,9 +237,17 @@
             <End Role="donante" EntitySet="donante" />
             <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
           </AssociationSet>
+          <AssociationSet Name="FK_donante_entidad" Association="Self.FK_donante_entidad">
+            <End Role="entidad" EntitySet="entidad" />
+            <End Role="donante" EntitySet="donante" />
+          </AssociationSet>
           <AssociationSet Name="FK_donante_periocidad" Association="Self.FK_donante_periocidad">
             <End Role="periocidad" EntitySet="periocidad" />
             <End Role="donante" EntitySet="donante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entidad_donante_categoria" Association="Self.FK_entidad_donante_categoria">
+            <End Role="donante_categoria" EntitySet="donante_categoria" />
+            <End Role="entidad" EntitySet="entidad" />
           </AssociationSet>
           <AssociationSet Name="FK_planificar_donante_donante" Association="Self.FK_planificar_donante_donante">
             <End Role="donante" EntitySet="donante" />
@@ -262,6 +288,7 @@
           <EntitySet Name="donante_categoria" EntityType="pipitosModel.donante_categoria" />
           <EntitySet Name="periocidad" EntityType="pipitosModel.periocidad" />
           <EntitySet Name="donante" EntityType="pipitosModel.donante" />
+          <EntitySet Name="entidad" EntityType="pipitosModel.entidad" />
           <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="pipitosModel.FK_comprobante_recoleccion_donante">
             <End Role="donante" EntitySet="donante" />
             <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
@@ -270,12 +297,12 @@
             <End Role="contacto" EntitySet="contacto" />
             <End Role="donante" EntitySet="donante" />
           </AssociationSet>
-          <AssociationSet Name="FK__donante__id_cate__09DE7BCC" Association="pipitosModel.FK__donante__id_cate__09DE7BCC">
-            <End Role="donante_categoria" EntitySet="donante_categoria" />
-            <End Role="donante" EntitySet="donante" />
-          </AssociationSet>
           <AssociationSet Name="FK__donante__id_ruta__2E1BDC42" Association="pipitosModel.FK__donante__id_ruta__2E1BDC42">
             <End Role="rutas" EntitySet="rutas" />
+            <End Role="donante" EntitySet="donante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_donante_entidad" Association="pipitosModel.FK_donante_entidad">
+            <End Role="entidad" EntitySet="entidad" />
             <End Role="donante" EntitySet="donante" />
           </AssociationSet>
           <AssociationSet Name="FK_donante_periocidad" Association="pipitosModel.FK_donante_periocidad">
@@ -285,6 +312,10 @@
           <AssociationSet Name="FK_planificar_donante_donante" Association="pipitosModel.FK_planificar_donante_donante">
             <End Role="donante" EntitySet="donante" />
             <End Role="planificar_donante" EntitySet="planificar_donante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entidad_donante_categoria" Association="pipitosModel.FK_entidad_donante_categoria">
+            <End Role="donante_categoria" EntitySet="donante_categoria" />
+            <End Role="entidad" EntitySet="entidad" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="contacto">
@@ -367,7 +398,7 @@
           </Key>
           <Property Name="id_categoriadon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_donante" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="donante" Relationship="pipitosModel.FK__donante__id_cate__09DE7BCC" FromRole="donante_categoria" ToRole="donante" />
+          <NavigationProperty Name="entidad" Relationship="pipitosModel.FK_entidad_donante_categoria" FromRole="donante_categoria" ToRole="entidad" />
         </EntityType>
         <EntityType Name="periocidad">
           <Key>
@@ -384,7 +415,7 @@
           </Key>
           <Property Name="id_donante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_contacto" Type="Int32" Nullable="false" />
-          <Property Name="id_categoriadon" Type="Int32" Nullable="false" />
+          <Property Name="identidad" Type="Int32" Nullable="false" />
           <Property Name="fecha_ingreso" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nombre_donante" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="gerente" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -394,10 +425,21 @@
           <Property Name="idperiocidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="donante" ToRole="comprobante_recoleccion" />
           <NavigationProperty Name="contacto" Relationship="pipitosModel.FK__donante__id_cont__08EA5793" FromRole="donante" ToRole="contacto" />
-          <NavigationProperty Name="donante_categoria" Relationship="pipitosModel.FK__donante__id_cate__09DE7BCC" FromRole="donante" ToRole="donante_categoria" />
           <NavigationProperty Name="rutas" Relationship="pipitosModel.FK__donante__id_ruta__2E1BDC42" FromRole="donante" ToRole="rutas" />
+          <NavigationProperty Name="entidad" Relationship="pipitosModel.FK_donante_entidad" FromRole="donante" ToRole="entidad" />
           <NavigationProperty Name="periocidad" Relationship="pipitosModel.FK_donante_periocidad" FromRole="donante" ToRole="periocidad" />
           <NavigationProperty Name="planificar_donante" Relationship="pipitosModel.FK_planificar_donante_donante" FromRole="donante" ToRole="planificar_donante" />
+        </EntityType>
+        <EntityType Name="entidad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_categoriadon" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="donante" Relationship="pipitosModel.FK_donante_entidad" FromRole="entidad" ToRole="donante" />
+          <NavigationProperty Name="donante_categoria" Relationship="pipitosModel.FK_entidad_donante_categoria" FromRole="entidad" ToRole="donante_categoria" />
         </EntityType>
         <Association Name="FK_comprobante_recoleccion_donante">
           <End Type="pipitosModel.donante" Role="donante" Multiplicity="1" />
@@ -423,18 +465,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__donante__id_cate__09DE7BCC">
-          <End Type="pipitosModel.donante_categoria" Role="donante_categoria" Multiplicity="1" />
-          <End Type="pipitosModel.donante" Role="donante" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="donante_categoria">
-              <PropertyRef Name="id_categoriadon" />
-            </Principal>
-            <Dependent Role="donante">
-              <PropertyRef Name="id_categoriadon" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__donante__id_ruta__2E1BDC42">
           <End Type="pipitosModel.rutas" Role="rutas" Multiplicity="1" />
           <End Type="pipitosModel.donante" Role="donante" Multiplicity="*" />
@@ -444,6 +474,18 @@
             </Principal>
             <Dependent Role="donante">
               <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_donante_entidad">
+          <End Type="pipitosModel.entidad" Role="entidad" Multiplicity="1" />
+          <End Type="pipitosModel.donante" Role="donante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entidad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="donante">
+              <PropertyRef Name="identidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -468,6 +510,18 @@
             </Principal>
             <Dependent Role="planificar_donante">
               <PropertyRef Name="id_donante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entidad_donante_categoria">
+          <End Type="pipitosModel.donante_categoria" Role="donante_categoria" Multiplicity="1" />
+          <End Type="pipitosModel.entidad" Role="entidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donante_categoria">
+              <PropertyRef Name="id_categoriadon" />
+            </Principal>
+            <Dependent Role="entidad">
+              <PropertyRef Name="id_categoriadon" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -564,9 +618,19 @@
                 <ScalarProperty Name="gerente" ColumnName="gerente" />
                 <ScalarProperty Name="nombre_donante" ColumnName="nombre_donante" />
                 <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
-                <ScalarProperty Name="id_categoriadon" ColumnName="id_categoriadon" />
+                <ScalarProperty Name="identidad" ColumnName="identidad" />
                 <ScalarProperty Name="id_contacto" ColumnName="id_contacto" />
                 <ScalarProperty Name="id_donante" ColumnName="id_donante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entidad">
+            <EntityTypeMapping TypeName="pipitosModel.entidad">
+              <MappingFragment StoreEntitySet="entidad">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="id_categoriadon" ColumnName="id_categoriadon" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

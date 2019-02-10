@@ -7,6 +7,7 @@
     <script src="../../Scripts/toastr.js"></script>
     <%--sweetalert libreria para notificaiones en cual el usario interectua, mensaje que cubre toda la pantalla--%>
     <script src="../../Scripts/sweetalert.js"></script>
+    <script src="funciones.js"></script>
     <script>
         $(document).ready(function () {
     $('[id*=gvdonante]').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
@@ -123,13 +124,13 @@
                                      <i class="far fa-edit"></i>
                                 </asp:linkbutton>--%>
                               
-                            <%--<asp:LinkButton ID="btnDelete" runat="server"  
-                                    OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"idcontacto") + ");" %>'
-                                    CssClass="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" 
-                                        title="Eliminar">
-                                        <i class="fas fa-trash-alt"></i>
-                                </asp:LinkButton>--%>
-
+                            
+                                  <asp:LinkButton ID="btnDelete" runat="server"  
+                                        OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"iddonante") + ");" %>'
+                                        CssClass="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" 
+                                        title="Eliminar" >
+                                            <i class="fas fa-trash-alt"></i>
+                                        </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

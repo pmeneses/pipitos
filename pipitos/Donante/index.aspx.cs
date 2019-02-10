@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -42,7 +43,8 @@ namespace pipitos.Donante
 
                 var result = (
                          from d in bd.donante
-                         join dc in bd.donante_categoria on d.id_categoriadon equals dc.id_categoriadon
+                         join en in bd.entidad on d.identidad equals en.id
+                         join dc in bd.donante_categoria on en.id_categoriadon equals dc.id_categoriadon
                          join c in bd.contacto on d.id_contacto equals c.id_contacto
                          join p in bd.periocidad on d.idperiocidad equals p.idperiocidad
                          join r in bd.rutas on d.id_ruta equals r.id_ruta
@@ -68,7 +70,53 @@ namespace pipitos.Donante
 
         protected void btnNewDonante_Click(object sender, EventArgs e)
         {
+            Response.Redirect("create.aspx");
+        }
 
+        [System.Web.Services.WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public static modulo.mensaje DeleteDonante(int id_donante)
+        {
+            try
+            {
+                pipitosEntities bd = new pipitosEntities();
+
+                var r = bd.donante.Find(id_donante);
+
+                if (r == null)
+                {
+                    return new modulo.mensaje
+                    {
+                        texto = "El registro que desea eliminar no esta disponible",
+                        tipo = "error"
+                    };
+                }
+
+                bd.donante.Remove(r);
+                bd.SaveChanges();
+
+                HttpContext.Current.Session["mensaje"] = new modulo.mensaje
+                {
+                    texto = "El registro se elimino exitosamente",
+                    tipo = "success"
+                };
+
+                //solo usamos esto para retornar un valor pero lo que en realidad se muestra es lo seteado en la variable de sesion
+                //porque se vuelve a recarga la pagina desde el java script
+                return new modulo.mensaje
+                {
+                    texto = "nada",
+                    tipo = "success"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new modulo.mensaje
+                {
+                    texto = ex.Message,
+                    tipo = "error"
+                };
+            }
         }
     }
 }

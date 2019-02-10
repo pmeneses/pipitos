@@ -12,18 +12,21 @@ namespace pipitos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class donante_categoria
+    public partial class entidad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public donante_categoria()
+        public entidad()
         {
-            this.entidad = new HashSet<entidad>();
+            this.donante = new HashSet<donante>();
         }
     
+        public int id { get; set; }
         public int id_categoriadon { get; set; }
-        public string tipo_donante { get; set; }
+        public string Nombre { get; set; }
+        public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<entidad> entidad { get; set; }
+        public virtual ICollection<donante> donante { get; set; }
+        public virtual donante_categoria donante_categoria { get; set; }
     }
 }

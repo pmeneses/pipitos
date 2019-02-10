@@ -23,7 +23,7 @@ namespace pipitos.Models
     
         public int id_donante { get; set; }
         public int id_contacto { get; set; }
-        public int id_categoriadon { get; set; }
+        public int identidad { get; set; }
         public System.DateTime fecha_ingreso { get; set; }
         public string nombre_donante { get; set; }
         public string gerente { get; set; }
@@ -35,8 +35,8 @@ namespace pipitos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comprobante_recoleccion> comprobante_recoleccion { get; set; }
         public virtual contacto contacto { get; set; }
-        public virtual donante_categoria donante_categoria { get; set; }
         public virtual rutas rutas { get; set; }
+        public virtual entidad entidad { get; set; }
         public virtual periocidad periocidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<planificar_donante> planificar_donante { get; set; }

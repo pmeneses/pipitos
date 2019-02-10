@@ -215,6 +215,12 @@
                                 </a>
                               </div>
                             </li>
+                        <li class="nav-item active">
+                                <a class="nav-link" runat="server" href="~/Donante/index.aspx">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                    <span>Donante</span>
+                                </a>
+                            </li>
                             <li class="nav-item active">
                                 <a class="nav-link" runat="server" href="~/planificarrecoleccion/index.aspx">
                                     <i class="fas fa-circle fa-xs"></i>
