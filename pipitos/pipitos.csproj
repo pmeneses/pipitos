@@ -189,12 +189,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
-    <EntityDeploy Include="Models\pipitosmodel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>pipitosmodel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\pipitosmodel.edmx.diagram">
+    <Content Include="Models\pipitosmodel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>pipitosmodel.edmx</DependentUpon>
+      <LastGenOutput>pipitosmodel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\pipitosmodel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>pipitosmodel.edmx</DependentUpon>
+      <LastGenOutput>pipitosmodel.cs</LastGenOutput>
     </Content>
     <Content Include="planificarrecoleccion\create.aspx" />
     <Content Include="planificarrecoleccion\edit.aspx" />
@@ -1673,16 +1676,6 @@
     <Content Include="sbadmin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="sbadmin\vendor\jquery\jquery.min.map" />
     <Content Include="sbadmin\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Models\pipitosmodel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>pipitosmodel.edmx</DependentUpon>
-      <LastGenOutput>pipitosmodel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\pipitosmodel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>pipitosmodel.edmx</DependentUpon>
-      <LastGenOutput>pipitosmodel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1707,6 +1700,13 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <EntityDeploy Include="Models\pipitosmodel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>pipitosmodel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\pipitosmodel.edmx.diagram">
+      <DependentUpon>pipitosmodel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1957,10 +1957,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\comprobante_recoleccion.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\contacto.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\donante.cs">
