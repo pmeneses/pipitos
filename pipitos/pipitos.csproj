@@ -158,6 +158,7 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="catalogos\Contacto\create.aspx" />
     <Content Include="catalogos\Contacto\index.aspx" />
+    <Content Include="catalogos\Contacto\update.aspx" />
     <Content Include="catalogos\Rutas\create.aspx" />
     <Content Include="catalogos\Rutas\Edit.aspx" />
     <Content Include="catalogos\Rutas\funciones.js" />
@@ -182,6 +183,9 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Donante\create.aspx" />
+    <Content Include="Donante\funciones.js" />
+    <Content Include="Donante\index.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
@@ -1859,6 +1863,13 @@
     <Compile Include="catalogos\Contacto\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="catalogos\Contacto\update.aspx.cs">
+      <DependentUpon>update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="catalogos\Contacto\update.aspx.designer.cs">
+      <DependentUpon>update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="catalogos\Rutas\create.aspx.cs">
       <DependentUpon>create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1929,6 +1940,20 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Donante\create.aspx.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Donante\create.aspx.designer.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Donante\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Donante\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1941,8 +1966,17 @@
     <Compile Include="Models\donante.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\donante_categoria.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entidad.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\material.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\periocidad.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pipitosmodel.Context.cs">

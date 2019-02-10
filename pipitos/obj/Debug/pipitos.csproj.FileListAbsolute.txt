@@ -338,7 +338,6 @@ C:\Users\DELL\Desktop\pipitos\pipitos\obj\Debug\pipitos.csproj.CopyComplete
 C:\Users\DELL\Desktop\pipitos\pipitos\obj\Debug\pipitos.dll
 C:\Users\DELL\Desktop\pipitos\pipitos\obj\Debug\pipitos.pdb
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.csproj.CoreCompileInputs.cache
-C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.csprojAssemblyReference.cache
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\bin\pipitos.dll.config
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\bin\pipitos.dll
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\bin\pipitos.pdb
