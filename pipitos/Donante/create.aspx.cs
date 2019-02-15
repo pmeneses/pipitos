@@ -11,8 +11,52 @@ namespace pipitos.Donante
     public partial class create : System.Web.UI.Page
     {
         pipitosEntities bd = new pipitosEntities();
+
+        private void llenarentidad(int idcategoriadon)
+        {
+            var entidad = bd.entidad.Where(c => c.id_categoriadon == idcategoriadon).ToList();
+            cbentidad.DataSource = entidad;
+            cbentidad.DataValueField = "id";
+            cbentidad.DataTextField = "Nombre";
+            cbentidad.DataBind();
+        }
+        private void llenarcombobox()
+        {
+            var ruta = bd.rutas.ToList();
+            cbruta.DataSource = ruta;
+            cbruta.DataValueField = "id_ruta";
+            cbruta.DataTextField = "nombre_ruta";
+            cbruta.DataBind();
+
+            var cat = bd.donante_categoria.ToList();
+            cbcategoria.DataSource = cat;
+            cbcategoria.DataValueField = "id_categoriadon";
+            cbcategoria.DataTextField = "tipo_donante";
+            cbcategoria.DataBind();
+
+            var contacto = bd.contacto.ToList();
+            cbcontacto.DataSource = contacto;
+            cbcontacto.DataValueField = "id_contacto";
+            cbcontacto.DataTextField = "nombre_contacto";
+            cbcontacto.DataBind();
+
+            var entidad = bd.entidad.ToList();
+            cbentidad.DataSource = entidad;
+            cbentidad.DataValueField = "id";
+            cbentidad.DataTextField = "Nombre";
+            cbentidad.DataBind();
+
+            var periocidad = bd.periocidad.ToList();
+            cbperiocidad.DataSource = periocidad;
+            cbperiocidad.DataValueField = "idperiocidad";
+            cbperiocidad.DataTextField = "descripcion";
+            cbperiocidad.DataBind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            var doncat = new donante_categoria();
+
             if (this.IsPostBack == false)
             {
                 txtfecharegistro.Focus();
@@ -23,38 +67,13 @@ namespace pipitos.Donante
                     this.Session["mensaje"] = null;
                 }
 
-                var ruta = bd.rutas.ToList();
-                cbruta.DataSource = ruta;
-                cbruta.DataValueField = "id_ruta";
-                cbruta.DataTextField = "nombre_ruta";
-                cbruta.DataBind();
+                llenarcombobox();
+                cbcategoria.SelectedValue = doncat.id_categoriadon.ToString();
+                cbcategoria_SelectedIndexChanged(null, null);
 
-                var cat = bd.donante_categoria.ToList();
-                cbcategoria.DataSource = cat;
-                cbcategoria.DataValueField = "id_categoriadon";
-                cbcategoria.DataTextField = "tipo_donante";
-                cbcategoria.DataBind();
-
-                var contacto = bd.contacto.ToList();
-                cbcontacto.DataSource = contacto;
-                cbcontacto.DataValueField = "id_contacto";
-                cbcontacto.DataTextField = "nombre_contacto";
-                cbcontacto.DataBind();
-
-                var entidad = bd.entidad.ToList();
-                cbentidad.DataSource = entidad;
-                cbentidad.DataValueField = "id";
-                cbentidad.DataTextField = "Nombre";
-                cbentidad.DataBind();
-
-                var periocidad = bd.periocidad.ToList();
-                cbperiocidad.DataSource = periocidad;
-                cbperiocidad.DataValueField = "idperiocidad";
-                cbperiocidad.DataTextField = "descripcion";
-                cbperiocidad.DataBind();
             }
 
-           
+
         }
 
         protected void btnguardar_Click(object sender, EventArgs e)
@@ -79,12 +98,15 @@ namespace pipitos.Donante
                 donante.nombre_donante = txtnombredonante.Text;
                 donante.gerente = txtgerente.Text;
                 donante.direccion = txtdireccion.Text;
+                //cbcategoria.SelectedValue = doncat.id_categoriadon.ToString();
+                //cbcategoria_SelectedIndexChanged(null, null);
                 donante.id_contacto = int.Parse(cbcontacto.SelectedValue);
                 donante.identidad = int.Parse(cbentidad.SelectedValue);
                 donante.estado = true;
                 donante.direccion = txtdireccion.Text;
                 donante.id_ruta = int.Parse(cbruta.SelectedValue);
                 donante.idperiocidad = int.Parse(cbperiocidad.SelectedValue);
+
                     
 
                 bd.donante.Add(donante);
@@ -127,6 +149,11 @@ namespace pipitos.Donante
         protected void btncancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("index.aspx");
+        }
+
+        protected void cbcategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            llenarentidad(int.Parse(cbcategoria.SelectedItem.Value));
         }
     }
 }

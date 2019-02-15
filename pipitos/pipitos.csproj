@@ -184,6 +184,7 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Donante\create.aspx" />
+    <Content Include="Donante\edit.aspx" />
     <Content Include="Donante\funciones.js" />
     <Content Include="Donante\index.aspx" />
     <Content Include="favicon.ico" />
@@ -1946,6 +1947,13 @@
     </Compile>
     <Compile Include="Donante\create.aspx.designer.cs">
       <DependentUpon>create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Donante\edit.aspx.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Donante\edit.aspx.designer.cs">
+      <DependentUpon>edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Donante\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

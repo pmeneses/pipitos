@@ -117,12 +117,12 @@
                             <ItemTemplate>
                                 <%--Botones de eliminar y editar contacto...--%>
 
-                               <%-- <asp:linkButton ID="btnEdit" oncommand="btnEdit_Command" CommandName="Edit" runat="server" Text="Editar" 
+                                <asp:linkButton ID="btnEdit" oncommand="btnEdit_Command" CommandName="Edit" runat="server" Text="Editar" 
                                 CssClass="btn btn-outline-info btn-sm" CommandArgument='<%# Container.DataItemIndex %>'
                                     data-toggle="tooltip" data-placement="top" 
                                         title="Editar">
                                      <i class="far fa-edit"></i>
-                                </asp:linkbutton>--%>
+                                </asp:linkbutton>
                               
                             
                                   <asp:LinkButton ID="btnDelete" runat="server"  

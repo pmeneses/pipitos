@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                 <div class="form-group">
                     <label for="cbcategoria">Categoria:</label>
-                    <asp:DropDownList runat="server" ID="cbcategoria" CssClass="form-control"/>
+                    <asp:DropDownList runat="server" ID="cbcategoria" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="cbcategoria_SelectedIndexChanged"/>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="cbcategoria"
                     CssClass="text-danger" ErrorMessage="Seleccione la categoria."/>
                     </div>
@@ -88,7 +88,6 @@
                      </div>
                  </div>
 
-              
 
             <div class="col-md-4">
                     <div class="form-group">

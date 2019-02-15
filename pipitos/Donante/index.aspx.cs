@@ -118,5 +118,12 @@ namespace pipitos.Donante
                 };
             }
         }
+
+        protected void btnEdit_Command(object sender, CommandEventArgs e)
+        {
+            var index = e.CommandArgument.ToString();
+            var iddonante = gvdonante.DataKeys[int.Parse(index)].Values["iddonante"];
+            Response.Redirect("edit.aspx?iddonante=" + iddonante);
+        }
     }
 }
