@@ -190,6 +190,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
+    <Content Include="modales\categioriadoncreate.aspx" />
+    <Content Include="modales\entidadescreate.aspx" />
+    <Content Include="modales\rutascreate.aspx" />
     <Content Include="Models\pipitosmodel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>pipitosmodel.edmx</DependentUpon>
@@ -1964,6 +1967,27 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="modales\categioriadoncreate.aspx.cs">
+      <DependentUpon>categioriadoncreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modales\categioriadoncreate.aspx.designer.cs">
+      <DependentUpon>categioriadoncreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modales\entidadescreate.aspx.cs">
+      <DependentUpon>entidadescreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modales\entidadescreate.aspx.designer.cs">
+      <DependentUpon>entidadescreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modales\rutascreate.aspx.cs">
+      <DependentUpon>rutascreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modales\rutascreate.aspx.designer.cs">
+      <DependentUpon>rutascreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="pipitos.SiteMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <!DOCTYPE html>
 
@@ -40,8 +41,28 @@
 
     <script>
         $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
         });
+
+        function showcatalogos(categoriadon, entidades, rutas) {
+            $find("mpcatalogos").show();
+            var x = document.getElementById('irmcatalagos');
+            if (categoriadon) {
+                x.src = "../modales/categioriadoncreate.aspx";
+            }
+            if (entidades) {
+                x.src = "../modales/entidadescreate.aspx";
+            }
+            if (rutas) {
+                x.src = "../modales/rutascreate.aspx";
+            }
+            return false;
+        }
+        function Hidecatalogos() {
+            $find("mpcatalogos").hide();
+            return false;
+        }
+
     </script>
 
 </head>
@@ -104,12 +125,54 @@
                 </div>
             </div>
         </div>--%>
-        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-          <a class="navbar-brand mr-1" href="index.html">SICAP</a>
 
+        <%--codigo para las ventanas modales globales--%>
+        <cc1:ModalPopupExtender ID="mpcatalogos" BehaviorID="mpcatalogos" 
+        runat="server" 
+        PopupControlID="Panlcatalogos" 
+        TargetControlID ="mncategoriadon"
+        BackgroundCssClass="Background">  
+        </cc1:ModalPopupExtender>
+
+        <asp:Panel ID="Panlcatalogos" runat="server" CssClass="Popup" align="center" 
+            style="display:none">  
+            <iframe id="irmcatalagos" ClientIDMode="Static"
+            runat="server" frameborder="0"
+            style="border:0px; height: 100%; width:100%"></iframe>  
+            <br />  
+            <asp:Button ID="Button2" CssClass="btn btn-primary" CausesValidation="false" 
+            runat="server" Text="Cerrar" OnClientClick="return Hidecatalogos()" />  
+        </asp:Panel>  
+
+
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
           <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle">
             <i class="fas fa-bars"></i>
           </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link">
+                    <span> SICAP</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Agregar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" id="mncategoriadon" runat="server" 
+                        onclick="return showcatalogos(true, false, false)">Categoria del donante</a>
+                        <a class="dropdown-item" runat="server" 
+                        onclick="return showcatalogos(false, true, false)">Entidades</a>
+                        <a class="dropdown-item" runat="server"
+                        onclick="return showcatalogos(false, false, true)">Rutas</a>
+                        <a class="dropdown-item" href="#">Contactos</a>
+                        <a class="dropdown-item" href="#">Periocidad</a>
+                    </div>
+                </li>
+            </ul>
+            </div>
 
           <!-- Navbar Search -->
          <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -246,7 +309,7 @@
             </ul>
 
             <div id="content-wrapper">
-                <div class="container-fluid">
+                <div class="container-fluid" style="height: calc(100vh - 155px); overflow-y: scroll">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                     <%--<hr />--%>

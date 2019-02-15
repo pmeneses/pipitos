@@ -41,16 +41,59 @@ input[type="select"] {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1px;
+    table-layout: fixed;
+}
+
+.table td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .table > tbody > tr > td {
-    padding: 5px;
+    padding: 3px;
     line-height: 1.428571429;
-    vertical-align: central;
+    vertical-align: top;
     border-top: 1px solid #ddd;
-    font-size: 14px;
-    text-align:left;
-    margin-left: 5px;
+    font-size: 12px;
+}
+
+.table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+}
+
+table.dataTable td, table.dataTable th {
+    box-sizing: border-box;
+}
+
+/* boton extra small */
+.btn-group-xs > .btn, .btn-xs {
+    padding: .25rem .4rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    font-size: .800rem;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    font-size: .800rem;
+}
+
+div.dataTables_wrapper div.dataTables_length {
+    font-size: .800rem;
 }
 
 .sidebar {
@@ -60,6 +103,31 @@ input[type="select"] {
 .bg-dark {
     background-color: #0160A1 !important;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+/* this targets the default scrollbar (compulsory) */
+
+::-webkit-scrollbar-track {
+    background-color: whitesmoke;
+}
+/* the new scrollbar will have a flat appearance with the set background color */
+
+::-webkit-scrollbar-thumb {
+    background-color: #2A2A2A;
+}
+/* this will style the thumb, ignoring the track */
+
+/* ::-webkit-scrollbar-button {
+    background-color: #007bff;
+}  */
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+::-webkit-scrollbar-corner {
+    background-color: black;
+}
+/* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
 
 .Background {
     background-color: Black;
