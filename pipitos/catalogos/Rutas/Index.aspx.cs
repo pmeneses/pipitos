@@ -95,5 +95,13 @@ namespace pipitos.catalogos.Rutas
                 };
             }
         }
+
+        protected void gvrutas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
+            }
+        }
     }
 }

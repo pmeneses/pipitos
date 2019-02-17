@@ -95,7 +95,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtrecibono">Recibo No</label>
-                    <asp:TextBox Enabled ="false" cssclass="form-control" TextMode="Number" 
+                    <asp:TextBox Enabled ="false" cssclass="form-control form-control-sm" TextMode="Number" 
                     runat="server" ID="txtrecibono" ClientIDMode="Static" />
                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtrecibono"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
@@ -104,7 +104,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtfecha">Fecha</label>
-                        <asp:TextBox cssclass="form-control" TextMode="Date" runat="server" ID="txtfecha"  />
+                        <asp:TextBox cssclass="form-control form-control-sm" TextMode="Date" runat="server" ID="txtfecha"  />
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtfecha"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
                   </div>
@@ -112,7 +112,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cbdonantes">Donante</label>
-                        <asp:DropDownList runat="server" ID="cbdonantes" CssClass="form-control"/>
+                        <asp:DropDownList runat="server" ID="cbdonantes" CssClass="form-control form-control-sm"/>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="cbdonantes"
                         CssClass="text-small text-danger" ErrorMessage="Seleccione el donante." />
                   </div>
@@ -122,7 +122,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtemail">Por cuenta de:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtporcuentade" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtporcuentade" />
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtporcuentade"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
                   </div>
@@ -130,7 +130,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtemail">Entregado por:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtentregadopor" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtentregadopor" />
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtentregadopor"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
                   </div>
@@ -138,7 +138,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtemail">Recibido por:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtrecibidopor" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtrecibidopor" />
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtrecibidopor"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
                   </div>
@@ -148,7 +148,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="txtenconceptode">En concepto de:</label>
-                    <asp:TextBox TextMode="MultiLine" cssclass="form-control" runat="server" ID="txtenconceptode" />
+                    <asp:TextBox TextMode="MultiLine" cssclass="form-control form-control-sm" runat="server" ID="txtenconceptode" />
                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtenconceptode"
                         CssClass="text-small text-danger" ErrorMessage="Campo obligatorio." />
                   </div>
@@ -170,10 +170,11 @@
             </div>
             <hr />
             <div class="row">
-                <div class="col-md-12">
-                    <asp:GridView CssClass="table table-bordered dt-responsive" ClientIDMode= Static
+                <div class="table-responsive">
+                    <asp:GridView CssClass="table table-hover" ClientIDMode= Static
                      runat="server" ID="gvdetalle" BorderColor="Transparent" 
-                     AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" Width="100%" DataKeyNames="id_recolecta">
+                     AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" Width="100%" 
+                     DataKeyNames="id_recolecta" OnRowDataBound="gvdetalle_RowDataBound">
                         <Columns>
                             <asp:BoundField ReadOnly="True" HeaderText="Material" 
                               InsertVisible="False" DataField="nombre_material"
@@ -196,12 +197,12 @@
                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                             </asp:BoundField>
                             <%--botones de acción sobre los registros...--%>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <%--Botones de eliminar y editar cliente...--%>
                                     <asp:LinkButton ID="btnDelete" runat="server"  
                                     OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"id_recolecta") + ");" %>'
-                                    CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" 
+                                    CssClass="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" 
                                         title="Eliminar" >
                                         <i class="fas fa-trash-alt"></i>
                                     </asp:LinkButton>

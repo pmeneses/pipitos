@@ -23,6 +23,8 @@
     <link href="sbadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="Content/sbadmin/sb-admin.css" rel="stylesheet">
 
+    <link href="Content/css/select2.css" rel="stylesheet"/>
+
     <link href="Content/Site.css" rel="stylesheet"/>
 
      <%--<script src="sbadmin/vendor/jquery/jquery.min.js"></script>--%>
@@ -36,12 +38,15 @@
     <script src='<%= ResolveUrl("sbadmin/vendor/datatables/jquery.dataTables.js") %>'></script>
     <script src='<%= ResolveUrl("sbadmin/vendor/datatables/dataTables.bootstrap4.js") %>'></script>
 
+    <script src='<%= ResolveUrl("Scripts/select2.min.js") %>'></script>
+
     <!-- Custom scripts for all pages-->
     <script src='<%= ResolveUrl("Scripts/sbadmin/sb-admin.min.js") %>'></script>
 
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('select').select2();
         });
 
         function showcatalogos(categoriadon, entidades, rutas) {
@@ -62,7 +67,6 @@
             $find("mpcatalogos").hide();
             return false;
         }
-
     </script>
 
 </head>

@@ -48,17 +48,18 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row" style="margin-bottom:10px;">
+            <div class="row col-md-12">
                 <%--<asp:Button runat="server" ID="btnNewContacto" cssclass="btn btn-primary btn-lg btn-block" OnClick="btnNewContact_Click"  Text="Agrega Contacto"></asp:Button>--%>
-                  <asp:LinkButton runat="server" id="btnNewContacto" OnClick="btnNewContact_Click" 
-                        class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Agregar
-                    </asp:LinkButton>
+                <asp:LinkButton runat="server" id="btnNewContacto" OnClick="btnNewContact_Click" 
+                    class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Agregar
+                </asp:LinkButton>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <asp:GridView CssClass="table table-hover table-sm" ClientIDMode= Static
-                 runat="server" ID="gvcontacto" BorderColor="Transparent" AutoGenerateColumns="false" DataKeyNames="idcontacto">
+            <hr />
+            <div class="table-responsive">
+                <asp:GridView CssClass="table table-hover table-sm" ClientIDMode= Static
+                 runat="server" ID="gvcontacto" BorderColor="Transparent" AutoGenerateColumns="false" 
+                 DataKeyNames="idcontacto" OnRowDataBound="gvcontacto_RowDataBound">
                     <Columns>
                         <asp:BoundField ReadOnly="True" HeaderText="Nombre Contacto" 
                           InsertVisible="False" DataField="Nombre"
@@ -76,30 +77,25 @@
                             <ItemStyle HorizontalAlign="Left"></ItemStyle>
                         </asp:BoundField>
                         <%--botones de acción sobre los registros...--%>
-                        <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px">
+                        <asp:TemplateField>
                             <ItemTemplate>
                                 <%--Botones de eliminar y editar contacto...--%>
-
-                                <asp:linkButton ID="btnEdit" oncommand="btnEdit_Command" CommandName="Edit" runat="server" Text="Editar" 
-                                CssClass="btn btn-outline-info btn-sm" CommandArgument='<%# Container.DataItemIndex %>'
-                                    data-toggle="tooltip" data-placement="top" 
-                                        title="Editar">
-                                     <i class="far fa-edit"></i>
-                                </asp:linkbutton>
-                              
+                            <asp:linkButton ID="btnEdit" oncommand="btnEdit_Command" CommandName="Edit" runat="server" Text="Editar" 
+                            CssClass="btn btn-outline-info btn-xs" CommandArgument='<%# Container.DataItemIndex %>'
+                                data-toggle="tooltip" data-placement="top" 
+                                    title="Editar">
+                                    <i class="far fa-edit"></i>
+                            </asp:linkbutton>
                             <asp:LinkButton ID="btnDelete" runat="server"  
-                                    OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"idcontacto") + ");" %>'
-                                    CssClass="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" 
-                                        title="Eliminar">
-                                        <i class="fas fa-trash-alt"></i>
-                                </asp:LinkButton>
-
+                            OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"idcontacto") + ");" %>'
+                            CssClass="btn btn-outline-danger btn-xs" data-toggle="tooltip" data-placement="top" 
+                                title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-                </div>
-                
             </div>
         </div>
     </div>

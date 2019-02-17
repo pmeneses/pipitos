@@ -58,7 +58,7 @@
             <div class="table-responsive">
                 <asp:GridView CssClass="table table-hover" ClientIDMode= Static
                     runat="server" ID="gvdonante" BorderColor="Transparent" 
-                    AutoGenerateColumns="false" DataKeyNames="iddonante">
+                    AutoGenerateColumns="false" DataKeyNames="iddonante" OnRowDataBound="gvdonante_RowDataBound">
                     <Columns>
                     <asp:BoundField ReadOnly="True" HeaderText="Fecha de Ingreso" 
                         InsertVisible="False" DataField="fechaing"

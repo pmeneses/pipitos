@@ -125,5 +125,13 @@ namespace pipitos.Donante
             var iddonante = gvdonante.DataKeys[int.Parse(index)].Values["iddonante"];
             Response.Redirect("edit.aspx?iddonante=" + iddonante);
         }
+
+        protected void gvdonante_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
+            }
+        }
     }
 }

@@ -50,16 +50,16 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row" style="margin-bottom:10px;">
+            <div class="row col-md-12">
                 <asp:LinkButton runat="server" ID="btnnewplanificacion" cssclass="btn btn-primary btn-sm" OnClick="btnnewplanificacion_Click">
                     <i class="fas fa-plus"></i> Agregar
                 </asp:LinkButton>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <asp:GridView CssClass="table table-bordered dt-responsive" ClientIDMode= Static
+            <hr />
+            <div class="table-responsive">
+                <asp:GridView CssClass="table table-hover" ClientIDMode= Static
                      runat="server" ID="gvplanificaciones" BorderColor="Transparent" 
-                     AutoGenerateColumns="false" DataKeyNames="numero">
+                     AutoGenerateColumns="false" DataKeyNames="numero" OnRowDataBound="gvplanificaciones_RowDataBound">
                         <Columns>
                             <asp:BoundField ReadOnly="True" HeaderText="Planificación n" 
                               InsertVisible="False" DataField="numero"
@@ -77,24 +77,20 @@
                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
                             </asp:BoundField>
                             <%--botones de acción sobre los registros...--%>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px">
+                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <%--Botones de eliminar y editar cliente...--%>
                                     <asp:LinkButton ID="btnEdit" CommandName="Edit" runat="server" 
-                                    CssClass="btn btn-outline-info btn-sm" CommandArgument='<%# Container.DataItemIndex %>'
+                                    CssClass="btn btn-outline-info btn-xs"
+                                    data-toggle="tooltip" data-placement="top" title="Editar"
+                                    CommandArgument='<%# Container.DataItemIndex %>'
                                     OnCommand="btnEdit_Command">
-                                        <i class="far fa-edit"></i> Editar
+                                        <i class="far fa-edit"></i>
                                     </asp:LinkButton>
-                                    <%--<asp:LinkButton ID="btnDelete" runat="server"  
-                                    OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"Idruta") + ");" %>'
-                                    CssClass="btn btn-outline-danger btn-sm" >
-                                        <i class="fas fa-trash-alt"></i> Eliminar
-                                    </asp:LinkButton>--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-               </div>
             </div>
         </div>
     </div>

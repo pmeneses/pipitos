@@ -30,19 +30,19 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtnombreruta">Nombre de la ruta:</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtnombreruta" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnombreruta" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtdepartamento">Departamento:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtdepartamento" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtdepartamento" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtmunicipio">Municipio:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtmunicipio" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtmunicipio" />
                   </div>
                 </div>
             </div>
@@ -50,13 +50,13 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtdistrito">Distrito:</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtdistrito" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtdistrito" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtbarrio">Barrio:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtbarrio" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtbarrio" />
                   </div>
                 </div>
             </div>

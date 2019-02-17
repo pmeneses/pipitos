@@ -31,44 +31,28 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtnombre">Nombre Contacto:</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtnombre" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnombre" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtnumtelefono">Número de telefono:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtnumtelefono" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnumtelefono" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtemail">CorreoElectronico:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtemail" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtemail" />
                   </div>
                 </div>
                  <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtnota">Notas:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtnota" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnota" />
                   </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </asp:Content>
+</asp:Content>

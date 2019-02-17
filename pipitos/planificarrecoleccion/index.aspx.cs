@@ -49,5 +49,13 @@ namespace pipitos.planificarrecoleccion
             var idplanificacion = gvplanificaciones.DataKeys[int.Parse(index)].Values["numero"];
             Response.Redirect("edit.aspx?idplanificacion=" + idplanificacion);
         }
+
+        protected void gvplanificaciones_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
+            }
+        }
     }
 }

@@ -11,15 +11,12 @@
 	    <li class="breadcrumb-item active">Contacto</li>
 	    <li class="breadcrumb-item active">Nuevo</li>
     </ol>
-
-
-
     <div class="card">
         <div class="card-header">
           Datos del Contacto
         </div>
         <div class="card-body">
-            <div class="row col-md-12" style="margin-bottom: 20px;">
+            <div class="row col-md-12">
                 <%--<div class="btn-group" role="group">--%>
                     <asp:Button runat="server" ID="btnguardar" cssclass="btn btn-outline-primary btn-sm" OnClick="btnguardar_Click" autopostback="true" Text="Guardar" >
                     </asp:Button>
@@ -27,23 +24,24 @@
                     </asp:Button>
                 <%--</div>--%>
             </div>
+            <hr />
             <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtnombrecontacto">Nombre del Contacto</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtnombrecontacto" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnombrecontacto" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtnumerotelefono">Numbero de Telefono</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtnumerotelefono" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnumerotelefono" />
                   </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtemail">Correo Electronico:</label>
-                        <asp:TextBox cssclass="form-control" runat="server" ID="txtemail" />
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtemail" />
                   </div>
                 </div>
             </div>
@@ -51,11 +49,10 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtnotas">Notas:</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtnotas" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnotas" />
                   </div>
                 </div>
                 </div>
             </div>
         </div>
-    </div>
 </asp:content>

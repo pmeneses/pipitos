@@ -30,7 +30,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtfecharegistro">Fecha de registro:</label>
-                    <asp:TextBox TextMode="Date" cssclass="form-control" runat="server" ID="txtfecharegistro" />
+                    <asp:TextBox TextMode="Date" cssclass="form-control form-control-sm" runat="server" ID="txtfecharegistro" />
                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtfecharegistro"
                     CssClass="text-danger" ErrorMessage="Seleccion fecha de registro."/>
                   </div>
@@ -38,7 +38,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtnombredonante">Nombre Donante</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtnombredonante" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnombredonante" />
                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtnombredonante"
                     CssClass="text-danger" ErrorMessage="Ingresar Nombre del donante."/>
                   </div>
@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                 <div class="form-group">
                     <label for="cbcategoria">Categoria:</label>
-                    <asp:DropDownList runat="server" ID="cbcategoria" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="cbcategoria_SelectedIndexChanged"/>
+                    <asp:DropDownList runat="server" ID="cbcategoria" CssClass="form-control form-control-sm" AutoPostBack="True" OnSelectedIndexChanged="cbcategoria_SelectedIndexChanged"/>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="cbcategoria"
                     CssClass="text-danger" ErrorMessage="Seleccione la categoria."/>
                     </div>
@@ -55,7 +55,7 @@
                  <div class="col-md-4">
                     <div class="form-group">
                         <label for="cbentidad">Entidad:</label>
-                        <asp:DropDownList runat="server" ID="cbentidad" CssClass="form-control"/>
+                        <asp:DropDownList runat="server" ID="cbentidad" CssClass="form-control form-control-sm"/>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="cbentidad"
                         CssClass="text-danger" ErrorMessage="Seleccione Entidad." />
                      </div>
@@ -64,7 +64,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cbruta">Ruta:</label>
-                        <asp:DropDownList runat="server" ID="cbruta" CssClass="form-control"/>
+                        <asp:DropDownList runat="server" ID="cbruta" CssClass="form-control form-control-sm"/>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="cbruta"
                         CssClass="text-danger" ErrorMessage="Seleccione la ruta." />
                      </div>
@@ -73,7 +73,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="txtgerente">Gerente</label>
-                    <asp:TextBox cssclass="form-control" runat="server" ID="txtgerente" />
+                    <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtgerente" />
                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtgerente"
                     CssClass="text-danger" ErrorMessage="Ingresar nombre del gerente."/>
                   </div>
@@ -82,7 +82,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cbcontacto">Persona de Contacto:</label>
-                        <asp:DropDownList runat="server" ID="cbcontacto" CssClass="form-control"/>
+                        <asp:DropDownList runat="server" ID="cbcontacto" CssClass="form-control form-control-sm"/>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="cbcontacto"
                         CssClass="text-danger" ErrorMessage="Seleccione Contacto." />
                      </div>
@@ -92,7 +92,7 @@
             <div class="col-md-4">
                     <div class="form-group">
                         <label for="cbperiocidad">Periocidad</label>
-                        <asp:DropDownList runat="server" ID="cbperiocidad" CssClass="form-control"/>
+                        <asp:DropDownList runat="server" ID="cbperiocidad" CssClass="form-control form-control-sm"/>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="cbperiocidad"
                         CssClass="text-danger" ErrorMessage="Seleccione Periocidad." />
                      </div>
@@ -101,7 +101,7 @@
                 <div class="col-md-12">
                 <div class="form-group">
                     <label for="txtdireccion">Dirección</label>
-                    <asp:TextBox textmode="multiline" cssclass="form-control" runat="server" ID="txtdireccion" />
+                    <asp:TextBox textmode="multiline" cssclass="form-control form-control-sm" runat="server" ID="txtdireccion" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtdireccion"
                     CssClass="text-danger" ErrorMessage="Ingresar direccion."/>
                   </div>
