@@ -7,63 +7,54 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace pipitos {
+namespace pipitos.modales {
     
     
-    public partial class SiteMaster {
+    public partial class contactocreate {
         
         /// <summary>
-        /// Control mpcatalogos.
+        /// Control btnguardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender mpcatalogos;
+        protected global::System.Web.UI.WebControls.LinkButton btnguardar;
         
         /// <summary>
-        /// Control Panlcatalogos.
+        /// Control txtnombrecontacto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panlcatalogos;
+        protected global::System.Web.UI.WebControls.TextBox txtnombrecontacto;
         
         /// <summary>
-        /// Control irmcatalagos.
+        /// Control txtnumerotelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlIframe irmcatalagos;
+        protected global::System.Web.UI.WebControls.TextBox txtnumerotelefono;
         
         /// <summary>
-        /// Control Button2.
+        /// Control txtemail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.TextBox txtemail;
         
         /// <summary>
-        /// Control mncategoriadon.
+        /// Control txtnotas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mncategoriadon;
-        
-        /// <summary>
-        /// Control MainContent.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.TextBox txtnotas;
     }
 }

@@ -1,13 +1,11 @@
-﻿<%@ Page Language="C#" UnobtrusiveValidationMode="None" AutoEventWireup="true" CodeBehind="categioriadoncreate.aspx.cs" Inherits="pipitos.modales.categioriadoncreate" %>
+﻿<%@ Page Language="C#" UnobtrusiveValidationMode="None" AutoEventWireup="true" CodeBehind="periocidadcreate.aspx.cs" Inherits="pipitos.modales.periocidadcreate" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -37,13 +35,12 @@
     <!-- Custom scripts for all pages-->
     <script src='<%= ResolveUrl("../Scripts/sbadmin/sb-admin.min.js") %>'></script>
     <script src='<%= ResolveUrl("../Scripts/toastr.js") %>'></script>
-    <%--<script src='<%= ResolveUrl("../sbadmin/vendor/jquery/jquery.min.js") %>'></script>--%>
 </head>
 <body>
-   <form runat="server">
+    <form runat="server">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Agregar categorias para donantes</h5>
+                <h5 class="card-title">Agregar periocidad</h5>
                 <hr />
                 <div class="row col-md-12">
                     <asp:LinkButton runat="server" ID="btnguardar" 
@@ -54,11 +51,16 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="txtnombre">Nombre</label>
+                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtnombre" />
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtnombre"
+                        CssClass="text-small text-danger" ErrorMessage="Campo obligatorio" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="cbdonantes">Nombre:</label>
-                            <asp:TextBox runat="server" ID="txtnombre" CssClass="form-control form-control-sm"/>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtnombre"
-                            CssClass="text-small text-danger" ErrorMessage="Campo obligatorio" />
+                            <asp:CheckBox Text="Activo" runat="server" ID="ckactiva" />
                         </div>
                     </div>
                 </div>

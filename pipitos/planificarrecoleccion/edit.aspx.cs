@@ -73,7 +73,7 @@ namespace pipitos.planificarrecoleccion
                 }
 
                 var p = bd.planificador_recoleccion.Find(int.Parse(idplanificacion.Value));
-                p.fecha = Convert.ToDateTime(txtfecharegistro.Text);
+                //p.fecha = Convert.ToDateTime(txtfecharegistro.Text);
                 p.fechavisita = Convert.ToDateTime(txtfechavisita.Text);
                 p.eliminada = false;
 

@@ -42,6 +42,8 @@
     <form runat="server">
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title">Agregar rutas</h5>
+                <hr />
                 <div class="row col-md-12">
                     <asp:LinkButton runat="server" ID="btnguardar" 
                     OnClick="btnguardar_Click" cssclass="btn btn-primary btn-sm">

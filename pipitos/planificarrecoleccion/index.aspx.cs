@@ -26,6 +26,7 @@ namespace pipitos.planificarrecoleccion
                 //vamos a llenar el grid con las rutas.
                 var r = bd.planificador_recoleccion
                 .Where(c=> c.eliminada == false)
+                .OrderBy(c=> c.id_plan_rec)
                 .Select(c => new
                 {
                     numero = c.id_plan_rec,

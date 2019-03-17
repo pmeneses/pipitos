@@ -61,11 +61,11 @@
                      runat="server" ID="gvplanificaciones" BorderColor="Transparent" 
                      AutoGenerateColumns="false" DataKeyNames="numero" OnRowDataBound="gvplanificaciones_RowDataBound">
                         <Columns>
-                            <asp:BoundField ReadOnly="True" HeaderText="Planificación n" 
+                            <%--<asp:BoundField ReadOnly="True" HeaderText="Planificación n" 
                               InsertVisible="False" DataField="numero"
                                 SortExpression="numero">
                                 <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            </asp:BoundField>
+                            </asp:BoundField>--%>
                             <asp:BoundField ReadOnly="True" HeaderText="Fecha de registro" 
                               InsertVisible="False" DataField="fechar"
                                 SortExpression="fechar">

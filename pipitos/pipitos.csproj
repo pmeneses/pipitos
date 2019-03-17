@@ -193,7 +193,9 @@
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
     <Content Include="modales\categioriadoncreate.aspx" />
+    <Content Include="modales\contactocreate.aspx" />
     <Content Include="modales\entidadescreate.aspx" />
+    <Content Include="modales\periocidadcreate.aspx" />
     <Content Include="modales\rutascreate.aspx" />
     <Content Include="Models\pipitosmodel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2021,12 +2023,26 @@
     <Compile Include="modales\categioriadoncreate.aspx.designer.cs">
       <DependentUpon>categioriadoncreate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modales\contactocreate.aspx.cs">
+      <DependentUpon>contactocreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modales\contactocreate.aspx.designer.cs">
+      <DependentUpon>contactocreate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="modales\entidadescreate.aspx.cs">
       <DependentUpon>entidadescreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="modales\entidadescreate.aspx.designer.cs">
       <DependentUpon>entidadescreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modales\periocidadcreate.aspx.cs">
+      <DependentUpon>periocidadcreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modales\periocidadcreate.aspx.designer.cs">
+      <DependentUpon>periocidadcreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="modales\rutascreate.aspx.cs">
       <DependentUpon>rutascreate.aspx</DependentUpon>
