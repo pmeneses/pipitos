@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="pipitosModel.AspNetUserClaims" Width="1.5" PointX="12.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.AspNetUserLogins" Width="1.5" PointX="12.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.AspNetUsers" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="pipitosModel.comprobante_recoleccion" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.contacto" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.donante" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.donante_categoria" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
@@ -23,8 +22,6 @@
         <EntityTypeShape EntityType="pipitosModel.rutas" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="pipitosModel.FK__recolecta__no_re__20C1E124" ManuallyRouted="false" />
-        <AssociationConnector Association="pipitosModel.FK_comprobante_recoleccion_donante" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_cont__08EA5793" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_ruta__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK_donante_entidad" ManuallyRouted="false" />
@@ -35,6 +32,9 @@
         <AssociationConnector Association="pipitosModel.FK__planifica__id_pl__182C9B23" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__planifica__id_do__173876EA" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="pipitosModel.comprobante_recoleccion" Width="1.5" PointX="5.25" PointY="4.75" />
+        <AssociationConnector Association="pipitosModel.FK__recolecta__no_re__20C1E124" />
+        <AssociationConnector Association="pipitosModel.FK_comprobante_recoleccion_donante" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

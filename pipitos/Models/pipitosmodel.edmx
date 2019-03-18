@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="pipitosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="pipitosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -446,8 +446,7 @@
             <End Role="planificar_donante" EntitySet="planificar_donante" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="pipitosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -510,21 +509,6 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="comprobante_recoleccion">
-          <Key>
-            <PropertyRef Name="no_recibo" />
-          </Key>
-          <Property Name="no_recibo" Type="Int32" Nullable="false" />
-          <Property Name="recibimos_de" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="a_nombre_de" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="en_concepto_de" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="entregado_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="recibido_por" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_donante" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="recolecta" Relationship="Self.FK__recolecta__no_re__20C1E124" FromRole="comprobante_recoleccion" ToRole="recolecta" />
-          <NavigationProperty Name="donante" Relationship="Self.FK_comprobante_recoleccion_donante" FromRole="comprobante_recoleccion" ToRole="donante" />
-        </EntityType>
         <EntityType Name="contacto">
           <Key>
             <PropertyRef Name="id_contacto" />
@@ -550,12 +534,12 @@
           <Property Name="direccion" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_ruta" Type="Int32" Nullable="false" />
           <Property Name="idperiocidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="comprobante_recoleccion" Relationship="Self.FK_comprobante_recoleccion_donante" FromRole="donante" ToRole="comprobante_recoleccion" />
           <NavigationProperty Name="contacto" Relationship="Self.FK__donante__id_cont__08EA5793" FromRole="donante" ToRole="contacto" />
           <NavigationProperty Name="rutas" Relationship="Self.FK__donante__id_ruta__2E1BDC42" FromRole="donante" ToRole="rutas" />
           <NavigationProperty Name="entidad" Relationship="Self.FK_donante_entidad" FromRole="donante" ToRole="entidad" />
           <NavigationProperty Name="periocidad" Relationship="Self.FK_donante_periocidad" FromRole="donante" ToRole="periocidad" />
           <NavigationProperty Name="planificar_donante" Relationship="Self.FK_planificar_donante_donante" FromRole="donante" ToRole="planificar_donante" />
+          <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="donante" ToRole="comprobante_recoleccion" />
         </EntityType>
         <EntityType Name="donante_categoria">
           <Key>
@@ -629,8 +613,8 @@
           <Property Name="id_material" Type="Int32" />
           <Property Name="cantidad" Type="Int32" />
           <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="comprobante_recoleccion" Relationship="Self.FK__recolecta__no_re__20C1E124" FromRole="recolecta" ToRole="comprobante_recoleccion" />
           <NavigationProperty Name="material" Relationship="Self.FK__recolecta__id_ma__21B6055D" FromRole="recolecta" ToRole="material" />
+          <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK__recolecta__no_re__20C1E124" FromRole="recolecta" ToRole="comprobante_recoleccion" />
         </EntityType>
         <EntityType Name="rutas">
           <Key>
@@ -670,30 +654,6 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__recolecta__no_re__20C1E124">
-          <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="0..1" />
-          <End Role="recolecta" Type="Self.recolecta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="comprobante_recoleccion">
-              <PropertyRef Name="no_recibo" />
-            </Principal>
-            <Dependent Role="recolecta">
-              <PropertyRef Name="no_recibo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_comprobante_recoleccion_donante">
-          <End Role="donante" Type="Self.donante" Multiplicity="1" />
-          <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="donante">
-              <PropertyRef Name="id_donante" />
-            </Principal>
-            <Dependent Role="comprobante_recoleccion">
-              <PropertyRef Name="id_donante" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -815,7 +775,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" />
           <EntitySet Name="contacto" EntityType="Self.contacto" />
           <EntitySet Name="donante" EntityType="Self.donante" />
           <EntitySet Name="donante_categoria" EntityType="Self.donante_categoria" />
@@ -833,14 +792,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="Self.FK__recolecta__no_re__20C1E124">
-            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
-            <End Role="recolecta" EntitySet="recolecta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
-            <End Role="donante" EntitySet="donante" />
-            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
           </AssociationSet>
           <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
             <End Role="contacto" EntitySet="contacto" />
@@ -882,7 +833,55 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="comprobante_recoleccion" EntityType="pipitosModel.comprobante_recoleccion" />
+          <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="pipitosModel.FK__recolecta__no_re__20C1E124">
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+            <End Role="recolecta" EntitySet="recolecta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="pipitosModel.FK_comprobante_recoleccion_donante">
+            <End Role="donante" EntitySet="donante" />
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="comprobante_recoleccion">
+          <Key>
+            <PropertyRef Name="no_recibo" />
+          </Key>
+          <Property Name="no_recibo" Type="Int32" Nullable="false" />
+          <Property Name="recibimos_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="a_nombre_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="en_concepto_de" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="entregado_por" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="recibido_por" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_donante" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="recolecta" Relationship="pipitosModel.FK__recolecta__no_re__20C1E124" FromRole="comprobante_recoleccion" ToRole="recolecta" />
+          <NavigationProperty Name="donante" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="comprobante_recoleccion" ToRole="donante" />
+        </EntityType>
+        <Association Name="FK__recolecta__no_re__20C1E124">
+          <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="0..1" />
+          <End Type="pipitosModel.recolecta" Role="recolecta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comprobante_recoleccion">
+              <PropertyRef Name="no_recibo" />
+            </Principal>
+            <Dependent Role="recolecta">
+              <PropertyRef Name="no_recibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comprobante_recoleccion_donante">
+          <End Type="pipitosModel.donante" Role="donante" Multiplicity="1" />
+          <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donante">
+              <PropertyRef Name="id_donante" />
+            </Principal>
+            <Dependent Role="comprobante_recoleccion">
+              <PropertyRef Name="id_donante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -941,20 +940,6 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="comprobante_recoleccion">
-            <EntityTypeMapping TypeName="pipitosModel.comprobante_recoleccion">
-              <MappingFragment StoreEntitySet="comprobante_recoleccion">
-                <ScalarProperty Name="no_recibo" ColumnName="no_recibo" />
-                <ScalarProperty Name="recibimos_de" ColumnName="recibimos_de" />
-                <ScalarProperty Name="a_nombre_de" ColumnName="a_nombre_de" />
-                <ScalarProperty Name="en_concepto_de" ColumnName="en_concepto_de" />
-                <ScalarProperty Name="entregado_por" ColumnName="entregado_por" />
-                <ScalarProperty Name="recibido_por" ColumnName="recibido_por" />
-                <ScalarProperty Name="id_donante" ColumnName="id_donante" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1076,6 +1061,20 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="comprobante_recoleccion">
+            <EntityTypeMapping TypeName="pipitosModel.comprobante_recoleccion">
+              <MappingFragment StoreEntitySet="comprobante_recoleccion">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id_donante" ColumnName="id_donante" />
+                <ScalarProperty Name="recibido_por" ColumnName="recibido_por" />
+                <ScalarProperty Name="entregado_por" ColumnName="entregado_por" />
+                <ScalarProperty Name="en_concepto_de" ColumnName="en_concepto_de" />
+                <ScalarProperty Name="a_nombre_de" ColumnName="a_nombre_de" />
+                <ScalarProperty Name="recibimos_de" ColumnName="recibimos_de" />
+                <ScalarProperty Name="no_recibo" ColumnName="no_recibo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

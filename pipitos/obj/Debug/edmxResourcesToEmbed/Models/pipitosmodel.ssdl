@@ -1,5 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="pipitosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
   <EntityType Name="comprobante_recoleccion">
     <Key>
       <PropertyRef Name="no_recibo" />
@@ -29,7 +90,7 @@
     </Key>
     <Property Name="id_donante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_contacto" Type="int" Nullable="false" />
-    <Property Name="id_categoriadon" Type="int" Nullable="false" />
+    <Property Name="identidad" Type="int" Nullable="false" />
     <Property Name="fecha_ingreso" Type="date" Nullable="false" />
     <Property Name="nombre_donante" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="gerente" Type="varchar" MaxLength="30" Nullable="false" />
@@ -44,6 +105,24 @@
     </Key>
     <Property Name="id_categoriadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipo_donante" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="entidad">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id_categoriadon" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="material">
+    <Key>
+      <PropertyRef Name="id_material" />
+    </Key>
+    <Property Name="id_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_material" Type="varchar" MaxLength="50" />
+    <Property Name="unidad_medida" Type="varchar" MaxLength="10" />
+    <Property Name="precio_unitario" Type="int" />
   </EntityType>
   <EntityType Name="periocidad">
     <Key>
@@ -74,6 +153,16 @@
     <Property Name="visitarealizada" Type="bit" />
     <Property Name="observaciones" Type="text" />
   </EntityType>
+  <EntityType Name="recolecta">
+    <Key>
+      <PropertyRef Name="id_recolecta" />
+    </Key>
+    <Property Name="id_recolecta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="no_recibo" Type="int" />
+    <Property Name="id_material" Type="int" />
+    <Property Name="cantidad" Type="int" />
+    <Property Name="precio" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
   <EntityType Name="rutas">
     <Key>
       <PropertyRef Name="id_ruta" />
@@ -85,18 +174,6 @@
     <Property Name="municipio" Type="varchar" MaxLength="20" />
     <Property Name="departamento" Type="varchar" MaxLength="20" />
   </EntityType>
-  <Association Name="FK__donante__id_cate__09DE7BCC">
-    <End Role="donante_categoria" Type="Self.donante_categoria" Multiplicity="1" />
-    <End Role="donante" Type="Self.donante" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="donante_categoria">
-        <PropertyRef Name="id_categoriadon" />
-      </Principal>
-      <Dependent Role="donante">
-        <PropertyRef Name="id_categoriadon" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__donante__id_cont__08EA5793">
     <End Role="contacto" Type="Self.contacto" Multiplicity="1" />
     <End Role="donante" Type="Self.donante" Multiplicity="*" />
@@ -145,6 +222,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__recolecta__id_ma__21B6055D">
+    <End Role="material" Type="Self.material" Multiplicity="0..1" />
+    <End Role="recolecta" Type="Self.recolecta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="material">
+        <PropertyRef Name="id_material" />
+      </Principal>
+      <Dependent Role="recolecta">
+        <PropertyRef Name="id_material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__recolecta__no_re__20C1E124">
+    <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="0..1" />
+    <End Role="recolecta" Type="Self.recolecta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comprobante_recoleccion">
+        <PropertyRef Name="no_recibo" />
+      </Principal>
+      <Dependent Role="recolecta">
+        <PropertyRef Name="no_recibo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_comprobante_recoleccion_donante">
     <End Role="donante" Type="Self.donante" Multiplicity="1" />
     <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="*" />
@@ -157,6 +258,74 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_donante_entidad">
+    <End Role="entidad" Type="Self.entidad" Multiplicity="1" />
+    <End Role="donante" Type="Self.donante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="entidad">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="donante">
+        <PropertyRef Name="identidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_donante_periocidad">
     <End Role="periocidad" Type="Self.periocidad" Multiplicity="1" />
     <End Role="donante" Type="Self.donante" Multiplicity="*" />
@@ -166,6 +335,18 @@
       </Principal>
       <Dependent Role="donante">
         <PropertyRef Name="idperiocidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_entidad_donante_categoria">
+    <End Role="donante_categoria" Type="Self.donante_categoria" Multiplicity="1" />
+    <End Role="entidad" Type="Self.entidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="donante_categoria">
+        <PropertyRef Name="id_categoriadon" />
+      </Principal>
+      <Dependent Role="entidad">
+        <PropertyRef Name="id_categoriadon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -182,18 +363,23 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="pipitosModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="donante_categoria" EntityType="Self.donante_categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="entidad" EntityType="Self.entidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="periocidad" EntityType="Self.periocidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="planificador_recoleccion" EntityType="Self.planificador_recoleccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="planificar_donante" EntityType="Self.planificar_donante" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="recolecta" EntityType="Self.recolecta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__donante__id_cate__09DE7BCC" Association="Self.FK__donante__id_cate__09DE7BCC">
-      <End Role="donante_categoria" EntitySet="donante_categoria" />
-      <End Role="donante" EntitySet="donante" />
-    </AssociationSet>
     <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
       <End Role="contacto" EntitySet="contacto" />
       <End Role="donante" EntitySet="donante" />
@@ -210,13 +396,45 @@
       <End Role="planificador_recoleccion" EntitySet="planificador_recoleccion" />
       <End Role="planificar_donante" EntitySet="planificar_donante" />
     </AssociationSet>
+    <AssociationSet Name="FK__recolecta__id_ma__21B6055D" Association="Self.FK__recolecta__id_ma__21B6055D">
+      <End Role="material" EntitySet="material" />
+      <End Role="recolecta" EntitySet="recolecta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="Self.FK__recolecta__no_re__20C1E124">
+      <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+      <End Role="recolecta" EntitySet="recolecta" />
+    </AssociationSet>
     <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
       <End Role="donante" EntitySet="donante" />
       <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
     </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_donante_entidad" Association="Self.FK_donante_entidad">
+      <End Role="entidad" EntitySet="entidad" />
+      <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
     <AssociationSet Name="FK_donante_periocidad" Association="Self.FK_donante_periocidad">
       <End Role="periocidad" EntitySet="periocidad" />
       <End Role="donante" EntitySet="donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_entidad_donante_categoria" Association="Self.FK_entidad_donante_categoria">
+      <End Role="donante_categoria" EntitySet="donante_categoria" />
+      <End Role="entidad" EntitySet="entidad" />
     </AssociationSet>
     <AssociationSet Name="FK_planificar_donante_donante" Association="Self.FK_planificar_donante_donante">
       <End Role="donante" EntitySet="donante" />
