@@ -248,22 +248,7 @@
                         <li class="nav-item"><a runat="server" href="~/Account/Login">Iniciar sesión</a></li>
                     </AnonymousTemplate>--%>
                     <%--<LoggedInTemplate>--%>
-                            <li class="nav-item active dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-fw fa-folder"></i>
-                                <span>Catalogos</span>
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                                <a class="dropdown-item" runat="server" href="catalogos/Rutas/Index.aspx">
-                                    <i class="fas fa-circle fa-xs"></i>
-                                    Rutas
-                                </a>
-                                <a class="dropdown-item" runat="server" href="catalogos/Contacto/index.aspx">
-                                    <i class="fas fa-circle fa-xs"></i>
-                                    Contacto
-                                </a>
-                              </div>
-                            </li>
+                            
                         <li class="nav-item active">
                                 <a class="nav-link" runat="server" href="~/Donante/index.aspx">
                                     <i class="fas fa-circle fa-xs"></i>
@@ -275,6 +260,30 @@
                                     <i class="fas fa-circle fa-xs"></i>
                                     <span>Planificar Recoleccion</span>
                                 </a>
+                            </li>
+
+                                <li class="nav-item active">
+                                <a class="nav-link" runat="server" href="~/comprobanterecoleccion/index.aspx">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                    <span>Comprob. Recoleccion</span>
+                                </a>
+                            </li>
+
+                <li class="nav-item active dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Gestiones</span>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                <a class="dropdown-item" runat="server" href="catalogos/Rutas/Index.aspx">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                    Gestionar Rutas
+                                </a>
+                                <a class="dropdown-item" runat="server" href="catalogos/Contacto/index.aspx">
+                                    <i class="fas fa-circle fa-xs"></i>
+                                    Gestionar Contacto
+                                </a>
+                              </div>
                             </li>
                             <%--<li class="nav-item">
                                 <a class="nav-link" runat="server" >
