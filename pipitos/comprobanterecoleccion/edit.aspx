@@ -81,12 +81,12 @@
             <div class="row col-md-12">
                 <div class="btn-group" role="group">
                     <asp:Button runat="server" ID="btnguardar" 
-                        cssclass="btn btn-primary btn-sm" 
+                        cssclass="btn btn-outline-primary btn-sm" 
                         OnClick="btnguardar_Click" 
                         Text="Guardar" >
                     </asp:Button>
                     <asp:Button runat="server" ID="btncancelar" 
-                        cssclass="btn btn-primary btn-sm" Text="Cancelar" >
+                        cssclass="btn btn-outline-danger btn-sm" Text="Cancelar" >
                     </asp:Button>
                 </div>
             </div>
@@ -202,7 +202,7 @@
                                     <%--Botones de eliminar y editar cliente...--%>
                                     <asp:LinkButton ID="btnDelete" runat="server"  
                                     OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"id_recolecta") + ");" %>'
-                                    CssClass="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" 
+                                    CssClass="btn btn-outline-danger btn-xs" data-toggle="tooltip" data-placement="top" 
                                         title="Eliminar" >
                                         <i class="fas fa-trash-alt"></i>
                                     </asp:LinkButton>

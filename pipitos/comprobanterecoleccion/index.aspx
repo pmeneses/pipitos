@@ -45,7 +45,7 @@
         <div class="card-body">
                 <div class="row col-md-12">
                     <button runat="server" id="btnnewcomprobante" onserverclick="btnnewcomprobante_ServerClick" 
-                        class="btn btn-primary">
+                        class="btn btn-primary btn-sm">
                         <i class="fas fa-plus"></i> Agregar
                     </button>
                 </div>
@@ -86,7 +86,7 @@
                                 <ItemTemplate>
                                     <%--Botones de eliminar y editar cliente...--%>
                                     <asp:LinkButton ID="btnEdit" CommandName="Edit" runat="server" 
-                                    CssClass="btn btn-primary btn-xs" CommandArgument='<%# Container.DataItemIndex %>'
+                                    CssClass="btn btn-outline-info btn-xs" CommandArgument='<%# Container.DataItemIndex %>'
                                     OnCommand="btnEdit_Command" data-toggle="tooltip" data-placement="top" 
                                     title="Editar">
                                         <i class="far fa-edit"></i>

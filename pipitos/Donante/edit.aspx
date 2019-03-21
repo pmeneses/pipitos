@@ -90,10 +90,12 @@
                         CssClass="text-danger" ErrorMessage="Seleccione Periocidad." />
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="txtdireccion">Direccion:</label>
-                        <asp:TextBox cssclass="form-control form-control-sm" runat="server" ID="txtdireccion" />
+                        <asp:TextBox textmode="multiline" cssclass="form-control form-control-sm" runat="server" ID="txtdireccion" />
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtdireccion"
+                        CssClass="text-danger" ErrorMessage="Ingresar direccion."/>
                   </div>
                 </div>
 

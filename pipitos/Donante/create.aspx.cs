@@ -34,6 +34,7 @@ namespace pipitos.Donante
             cbcategoria.DataTextField = "tipo_donante";
             cbcategoria.DataBind();
 
+
             var contacto = bd.contacto.ToList();
             cbcontacto.DataSource = contacto;
             cbcontacto.DataValueField = "id_contacto";
@@ -92,7 +93,7 @@ namespace pipitos.Donante
                 //vamos a guardar el donante
                 var donante = new donante();
                 var doncat = new donante_categoria();
-                
+
 
                 donante.fecha_ingreso = Convert.ToDateTime(txtfecharegistro.Text);
                 donante.nombre_donante = txtnombredonante.Text;
@@ -107,7 +108,7 @@ namespace pipitos.Donante
                 donante.id_ruta = int.Parse(cbruta.SelectedValue);
                 donante.idperiocidad = int.Parse(cbperiocidad.SelectedValue);
 
-                    
+
 
                 bd.donante.Add(donante);
                 bd.SaveChanges();
@@ -135,7 +136,7 @@ namespace pipitos.Donante
             if (txtfecharegistro.Text == string.Empty)
                 mensaje += "Ingrese la fecha de registro <br>";
             //if (txtfechavisita.Text == string.Empty)
-                //mensaje += "Ingrese la fecha de visita <br>";
+            //mensaje += "Ingrese la fecha de visita <br>";
 
             return mensaje;
         }
@@ -154,6 +155,26 @@ namespace pipitos.Donante
         protected void cbcategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             llenarentidad(int.Parse(cbcategoria.SelectedItem.Value));
+            if (cbcategoria.SelectedIndex == 0)
+            {
+                //cbcontacto.Visible = false;
+                //cbcontacto.SelectedItem.Text = "";
+                cbcontacto.Enabled = false;
+                txtgerente.Enabled = false;
+                cbruta.Enabled = false;
+                txtdireccion.Enabled = false;
+                
+                
+            }
+            else{
+                //cbcontacto.Visible = true;
+                cbcontacto.Enabled = true;
+                txtgerente.Enabled = true;
+                cbruta.Enabled = true;
+                txtdireccion.Enabled = true;
+            }
+
         }
+
     }
 }

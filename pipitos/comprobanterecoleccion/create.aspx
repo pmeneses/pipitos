@@ -79,12 +79,12 @@
             <div class="row col-md-12">
                 <div class="btn-group" role="group">
                     <asp:Button runat="server" ID="btnguardar" 
-                        cssclass="btn btn-primary btn-sm" 
+                        cssclass="btn btn-outline-primary btn-sm" 
                         OnClick="btnguardar_Click" 
                         Text="Guardar" >
                     </asp:Button>
                     <asp:Button runat="server" ID="btncancelar" 
-                        cssclass="btn btn-primary btn-sm" Text="Cancelar" >
+                        cssclass="btn btn-outline-danger btn-sm" Text="Cancelar" >
                     </asp:Button>
                 </div>
             </div>
