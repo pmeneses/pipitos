@@ -12,18 +12,21 @@ namespace pipitos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class Municipio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public Municipio()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.Sucursal = new HashSet<Sucursal>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public string nombre { get; set; }
+        public bool activo { get; set; }
+        public int iddepartamento { get; set; }
     
+        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<Sucursal> Sucursal { get; set; }
     }
 }
