@@ -103,5 +103,10 @@ namespace pipitos.catalogos.Rutas
                 e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
             }
         }
+
+        protected void btnActualizar_ServerClick(object sender, EventArgs e)
+        {
+            Server.TransferRequest(Request.Url.AbsolutePath, false);
+        }
     }
 }

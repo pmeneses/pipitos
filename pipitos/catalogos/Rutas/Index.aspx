@@ -18,8 +18,12 @@
                 <div class="row col-md-12">
                     <%--<asp:Button runat="server" ID="btnnewruta" cssclass="btn btn-primary btn-lg btn-block" onclick="btnnewruta_Click" Text="Agregar ruta"></asp:Button>--%>
                     <button runat="server" id="btnnewruta" onserverclick="btnnewruta_Click" 
-                        class="btn btn-primary btn-sm">
+                        class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-plus"></i> Agregar
+                    </button>
+                    <button runat="server" id="btnActualizar" onserverclick="btnActualizar_ServerClick"
+                        class="btn btn-outline-success btn-sm">
+                          <i class="fas fa-sync"></i>Actualizar
                     </button>
                 </div>
                 <hr />

@@ -22,6 +22,15 @@ namespace pipitos.Donante {
         protected global::System.Web.UI.WebControls.LinkButton btnNewDonante;
         
         /// <summary>
+        /// btnActualizar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnActualizar;
+        
+        /// <summary>
         /// gvdonante control.
         /// </summary>
         /// <remarks>

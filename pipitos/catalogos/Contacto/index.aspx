@@ -51,9 +51,13 @@
             <div class="row col-md-12">
                 <%--<asp:Button runat="server" ID="btnNewContacto" cssclass="btn btn-primary btn-lg btn-block" OnClick="btnNewContact_Click"  Text="Agrega Contacto"></asp:Button>--%>
                 <asp:LinkButton runat="server" id="btnNewContacto" OnClick="btnNewContact_Click" 
-                    class="btn btn-primary btn-sm">
+                    class="btn btn-outline-primary btn-sm">
                     <i class="fas fa-plus"></i> Agregar
                 </asp:LinkButton>
+                <asp:LinkButton runat="server" id="btnActualizar" onclick="btnActualizar_Click"CssClass="btn btn-outline-success btn-sm ">
+                        <i class="fas fa-sync"></i>Actualizar
+                </asp:linkbutton>
+
             </div>
             <hr />
             <div class="table-responsive">

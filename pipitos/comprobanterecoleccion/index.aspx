@@ -45,9 +45,15 @@
         <div class="card-body">
                 <div class="row col-md-12">
                     <button runat="server" id="btnnewcomprobante" onserverclick="btnnewcomprobante_ServerClick" 
-                        class="btn btn-primary btn-sm">
+                        class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-plus"></i> Agregar
                     </button>
+                    <button runat="server" id="btnActualizar" onserverclick="btnActualizar_ServerClick"
+                        class="btn btn-outline-success btn-sm">
+                          <i class="fas fa-sync"></i>Actualizar
+
+                    </button>
+
                 </div>
                 <hr />
                 <div class="table-responsive">

@@ -47,12 +47,17 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row">
+            <div class="row col-md-12" style="margin-bottom: 10px;">
+                <div class="btn-group" role="group">
                 <%--<asp:Button runat="server" ID="btnNewContacto" cssclass="btn btn-primary btn-lg btn-block" OnClick="btnNewContact_Click"  Text="Agrega Contacto"></asp:Button>--%>
                 <asp:LinkButton runat="server" id="btnNewDonante" OnClick="btnNewDonante_Click"
-                    class="btn btn-primary btn-sm">
+                    class="btn btn-outline-primary btn-sm">
                     <i class="fas fa-plus"></i> Agregar
-                </asp:LinkButton>
+                    </asp:LinkButton>
+                    <asp:LinkButton runat="server" id="btnActualizar" OnClick="btnActualizar_Click" CssClass="btn btn-outline-success btn-sm ">
+                        <i class="fas fa-sync"></i>Actualizar
+                        </asp:linkbutton>
+                </div>
             </div>
             <hr />
             <div class="table-responsive">

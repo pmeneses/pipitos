@@ -91,5 +91,10 @@ namespace pipitos.catalogos.Contacto
                 e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
             }
         }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            Server.TransferRequest(Request.Url.AbsolutePath, false);
+        }
     }
 }

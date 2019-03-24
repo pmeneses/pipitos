@@ -51,9 +51,12 @@
     <div class="card">
         <div class="card-body">
             <div class="row col-md-12">
-                <asp:LinkButton runat="server" ID="btnnewplanificacion" cssclass="btn btn-primary btn-sm" OnClick="btnnewplanificacion_Click">
+                <asp:LinkButton runat="server" ID="btnnewplanificacion" cssclass="btn btn-outline-primary btn-sm" OnClick="btnnewplanificacion_Click">
                     <i class="fas fa-plus"></i> Agregar
                 </asp:LinkButton>
+                 <asp:LinkButton runat="server" id="btnActualizar" onclick="btnActualizar_Click" cssclass="btn btn-outline-success btn-sm ">
+                        <i class="fas fa-sync"></i>Actualizar
+                        </asp:linkbutton>
             </div>
             <hr />
             <div class="table-responsive">
