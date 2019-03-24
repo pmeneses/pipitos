@@ -184,6 +184,9 @@
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="controlusuarios\cambiarsucursal.aspx" />
+    <Content Include="controlusuarios\create.aspx" />
+    <Content Include="controlusuarios\index.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Donante\create.aspx" />
     <Content Include="Donante\edit.aspx" />
@@ -1985,6 +1988,27 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="controlusuarios\cambiarsucursal.aspx.cs">
+      <DependentUpon>cambiarsucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controlusuarios\cambiarsucursal.aspx.designer.cs">
+      <DependentUpon>cambiarsucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="controlusuarios\create.aspx.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controlusuarios\create.aspx.designer.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="controlusuarios\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controlusuarios\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2072,6 +2096,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Departamento.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\donante.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
@@ -2083,6 +2110,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\material.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Municipio.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\periocidad.cs">
@@ -2113,6 +2143,12 @@
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rutas.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sucursal.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\variables.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="modulo.cs" />

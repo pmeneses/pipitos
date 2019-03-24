@@ -9,19 +9,16 @@
         <EntityTypeShape EntityType="pipitosModel.AspNetRoles" Width="1.5" PointX="7.75" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.AspNetUserClaims" Width="1.5" PointX="12.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.AspNetUserLogins" Width="1.5" PointX="12.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="pipitosModel.AspNetUsers" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.contacto" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.donante" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.donante_categoria" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.entidad" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="pipitosModel.material" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="pipitosModel.material" Width="1.5" PointX="5.375" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.periocidad" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.planificador_recoleccion" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.planificar_donante" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.recolecta" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="pipitosModel.rutas" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_cont__08EA5793" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__donante__id_ruta__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK_donante_entidad" ManuallyRouted="false" />
@@ -31,10 +28,21 @@
         <AssociationConnector Association="pipitosModel.FK__recolecta__id_ma__21B6055D" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__planifica__id_pl__182C9B23" ManuallyRouted="false" />
         <AssociationConnector Association="pipitosModel.FK__planifica__id_do__173876EA" ManuallyRouted="false" />
-        <AssociationConnector Association="pipitosModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="pipitosModel.comprobante_recoleccion" Width="1.5" PointX="5.25" PointY="4.75" />
         <AssociationConnector Association="pipitosModel.FK__recolecta__no_re__20C1E124" />
         <AssociationConnector Association="pipitosModel.FK_comprobante_recoleccion_donante" />
+        <EntityTypeShape EntityType="pipitosModel.Departamento" Width="1.5" PointX="3.25" PointY="12.25" />
+        <EntityTypeShape EntityType="pipitosModel.Municipio" Width="1.5" PointX="5.5" PointY="15.625" />
+        <EntityTypeShape EntityType="pipitosModel.Sucursal" Width="1.5" PointX="7.75" PointY="12.75" />
+        <AssociationConnector Association="pipitosModel.FK_Municipio_Departamento" />
+        <AssociationConnector Association="pipitosModel.FK_Sucursal_Departamento" />
+        <AssociationConnector Association="pipitosModel.FK_Sucursal_municipio" />
+        <EntityTypeShape EntityType="pipitosModel.variables" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="pipitosModel.AspNetUsers" Width="1.5" PointX="10" PointY="10.375" />
+        <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="pipitosModel.FK_AspNetUsers_Sucursal" />
+        <AssociationConnector Association="pipitosModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
