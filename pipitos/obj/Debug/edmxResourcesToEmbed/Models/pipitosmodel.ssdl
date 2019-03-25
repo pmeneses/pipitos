@@ -60,6 +60,10 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="idsucursal" Type="int" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="comprobante_recoleccion">
     <Key>
@@ -83,6 +87,14 @@
     <Property Name="num_telefono" Type="varchar" MaxLength="15" />
     <Property Name="correo_electronico" Type="varchar" MaxLength="30" />
     <Property Name="notas" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="donante">
     <Key>
@@ -123,6 +135,15 @@
     <Property Name="nombre_material" Type="varchar" MaxLength="50" />
     <Property Name="unidad_medida" Type="varchar" MaxLength="10" />
     <Property Name="precio_unitario" Type="int" />
+  </EntityType>
+  <EntityType Name="Municipio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+    <Property Name="iddepartamento" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="periocidad">
     <Key>
@@ -173,6 +194,23 @@
     <Property Name="distrito" Type="varchar" MaxLength="5" />
     <Property Name="municipio" Type="varchar" MaxLength="20" />
     <Property Name="departamento" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Sucursal">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="activa" Type="bit" Nullable="false" />
+    <Property Name="iddepartamento" Type="int" Nullable="false" />
+    <Property Name="idmunicipio" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="variables">
+    <Key>
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK__donante__id_cont__08EA5793">
     <End Role="contacto" Type="Self.contacto" Multiplicity="1" />
@@ -243,6 +281,18 @@
       </Principal>
       <Dependent Role="recolecta">
         <PropertyRef Name="no_recibo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Sucursal">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="idsucursal" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -350,6 +400,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Municipio_Departamento">
+    <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+    <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Municipio">
+        <PropertyRef Name="iddepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_planificar_donante_donante">
     <End Role="donante" Type="Self.donante" Multiplicity="1" />
     <End Role="planificar_donante" Type="Self.planificar_donante" Multiplicity="*" />
@@ -362,6 +424,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Sucursal_Departamento">
+    <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sucursal">
+        <PropertyRef Name="iddepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sucursal_municipio">
+    <End Role="Municipio" Type="Self.Municipio" Multiplicity="1" />
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Municipio">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sucursal">
+        <PropertyRef Name="idmunicipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="pipitosModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -371,15 +457,19 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="donante_categoria" EntityType="Self.donante_categoria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="entidad" EntityType="Self.entidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="periocidad" EntityType="Self.periocidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="planificador_recoleccion" EntityType="Self.planificador_recoleccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="planificar_donante" EntityType="Self.planificar_donante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="recolecta" EntityType="Self.recolecta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rutas" EntityType="Self.rutas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="variables" EntityType="Self.variables" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__donante__id_cont__08EA5793" Association="Self.FK__donante__id_cont__08EA5793">
       <End Role="contacto" EntitySet="contacto" />
       <End Role="donante" EntitySet="donante" />
@@ -403,6 +493,10 @@
     <AssociationSet Name="FK__recolecta__no_re__20C1E124" Association="Self.FK__recolecta__no_re__20C1E124">
       <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
       <End Role="recolecta" EntitySet="recolecta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Sucursal" Association="Self.FK_AspNetUsers_Sucursal">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
     <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
       <End Role="donante" EntitySet="donante" />
@@ -436,9 +530,21 @@
       <End Role="donante_categoria" EntitySet="donante_categoria" />
       <End Role="entidad" EntitySet="entidad" />
     </AssociationSet>
+    <AssociationSet Name="FK_Municipio_Departamento" Association="Self.FK_Municipio_Departamento">
+      <End Role="Departamento" EntitySet="Departamento" />
+      <End Role="Municipio" EntitySet="Municipio" />
+    </AssociationSet>
     <AssociationSet Name="FK_planificar_donante_donante" Association="Self.FK_planificar_donante_donante">
       <End Role="donante" EntitySet="donante" />
       <End Role="planificar_donante" EntitySet="planificar_donante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sucursal_Departamento" Association="Self.FK_Sucursal_Departamento">
+      <End Role="Departamento" EntitySet="Departamento" />
+      <End Role="Sucursal" EntitySet="Sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sucursal_municipio" Association="Self.FK_Sucursal_municipio">
+      <End Role="Municipio" EntitySet="Municipio" />
+      <End Role="Sucursal" EntitySet="Sucursal" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

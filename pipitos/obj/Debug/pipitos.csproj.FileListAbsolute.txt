@@ -394,3 +394,5 @@ C:\Users\jorge\Documents\GitHub\pipitos\pipitos\bin\es\System.Web.Optimization.r
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.csproj.CopyComplete
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.dll
 C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.pdb
+C:\Users\jorge\Documents\GitHub\pipitos\pipitos\bin\AjaxControlToolkit.dll
+C:\Users\jorge\Documents\GitHub\pipitos\pipitos\obj\Debug\pipitos.csprojAssemblyReference.cache
