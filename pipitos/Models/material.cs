@@ -18,6 +18,7 @@ namespace pipitos.Models
         public material()
         {
             this.recolecta = new HashSet<recolecta>();
+            this.ComprobanteDesecho = new HashSet<ComprobanteDesecho>();
         }
     
         public int id_material { get; set; }
@@ -27,5 +28,7 @@ namespace pipitos.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<recolecta> recolecta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComprobanteDesecho> ComprobanteDesecho { get; set; }
     }
 }

@@ -6,7 +6,40 @@
     <script src="funciones.js"></script>
     <script>
         $(document).ready(function () {
-            $('[id*=gvdetalle]').prepend($("<thead></thead>").append($(this)
+            $('[id*=gvdetalle]').prepend($("<thead></thead>").append($("#gvdetalle")
+            .find("tr:first"))).DataTable({
+                "bDestroy": true,
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                fixedHeader: {
+                    "header": true,
+                    "footer": true
+                }
+            });
+
+             $('[id*=gvdesechos]').prepend($("<thead></thead>").append($("#gvdesechos")
             .find("tr:first"))).DataTable({
                 "bDestroy": true,
                 "language": {
@@ -39,6 +72,13 @@
                 }
             });
         });
+
+        function ShowAgregarDesecho(idrecolecta) {
+            $find("mp1").show();
+            var x = document.getElementById('irm1');
+            x.src = "agregardesecho.aspx?recibono=" + document.getElementById('txtrecibono').value + "&idrecolecta=" + idrecolecta;
+            return false;
+        }
 
         function ShowModalPopup() {
             $find("mp1").show();
@@ -167,12 +207,25 @@
                 </div>
             </div>
             <hr />
-            <div class="table-responsive">
-                <asp:GridView CssClass="table table-hover" ClientIDMode= Static
-                runat="server" ID="gvdetalle" BorderColor="Transparent" 
-                AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" Width="100%" 
-                DataKeyNames="id_recolecta" OnRowDataBound="gvdetalle_RowDataBound">
-                        <Columns>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="recolecta-tab" data-toggle="tab" href="#recolecta" role="tab" aria-controls="recolecta" aria-selected="true">Recolecta</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="desechos-tab" data-toggle="tab" href="#desechos" role="tab" aria-controls="desechos" aria-selected="false">Desechos</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="recolecta" role="tabpanel" aria-labelledby="recolecta-tab">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                 <asp:GridView CssClass="table table-hover" ClientIDMode= Static
+                                runat="server" ID="gvdetalle" BorderColor="Transparent" 
+                                AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" Width="100%" 
+                                DataKeyNames="id_recolecta" OnRowDataBound="gvdetalle_RowDataBound">
+                                    <Columns>
                             <asp:BoundField ReadOnly="True" HeaderText="Material" 
                               InsertVisible="False" DataField="nombre_material"
                                 SortExpression="nombre_material">
@@ -196,7 +249,12 @@
                             <%--botones de acción sobre los registros...--%>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <%--Botones de eliminar y editar cliente...--%>
+                                    <asp:LinkButton ID="LinkButton1" runat="server"  
+                                    OnClientClick='<%# " return ShowAgregarDesecho("+ DataBinder.Eval(Container.DataItem,"id_recolecta") + ");" %>'
+                                    CssClass="btn btn-outline-danger btn-xs" data-toggle="tooltip" data-placement="top" 
+                                        title="Desechar" >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </asp:LinkButton>
                                     <asp:LinkButton ID="btnDelete" runat="server"  
                                     OnClientClick='<%# " return confirmardelete("+ DataBinder.Eval(Container.DataItem,"id_recolecta") + ");" %>'
                                     CssClass="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" 
@@ -206,7 +264,50 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                    </asp:GridView>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="tab-pane fade" id="desechos" role="tabpanel" aria-labelledby="desechos-tab">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <asp:GridView CssClass="table table-hover" ClientIDMode= Static
+                                runat="server" ID="gvdesechos" BorderColor="Transparent" 
+                                AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" Width="100%" 
+                                DataKeyNames="iddesecho" OnRowDataBound="gvdesechos_RowDataBound">
+                            <Columns>
+                                <asp:BoundField ReadOnly="True" HeaderText="Material" 
+                                    InsertVisible="False" DataField="nombre_material"
+                                    SortExpression="nombre_material">
+                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField ReadOnly="True" HeaderText="Cantidad" 
+                                    InsertVisible="False" DataField="cantidad"
+                                    SortExpression="cantidad">
+                                    <ItemStyle HorizontalAlign="Left"></ItemStyle>
+                                </asp:BoundField>
+                                <%--botones de acción sobre los registros...--%>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="btnDelete" runat="server"  
+                                        OnClientClick='<%# " return eliminardesecho("+ DataBinder.Eval(Container.DataItem,"iddesecho") + ");" %>'
+                                        CssClass="btn btn-outline-danger btn-xs" data-toggle="tooltip" data-placement="top" 
+                                            title="Eliminar" >
+                                            <i class="fas fa-trash-alt"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
             </div>
         </div>
     </div>

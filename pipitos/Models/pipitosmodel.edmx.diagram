@@ -43,6 +43,9 @@
         <AssociationConnector Association="pipitosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="pipitosModel.FK_AspNetUsers_Sucursal" />
         <AssociationConnector Association="pipitosModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="pipitosModel.ComprobanteDesecho" Width="1.75" PointX="10.625" PointY="5.5" />
+        <AssociationConnector Association="pipitosModel.FK_ComprobanteDesecho_comprobante_recoleccion" />
+        <AssociationConnector Association="pipitosModel.FK_ComprobanteDesecho_material" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@ namespace pipitos.Models
         public comprobante_recoleccion()
         {
             this.recolecta = new HashSet<recolecta>();
+            this.ComprobanteDesecho = new HashSet<ComprobanteDesecho>();
         }
     
         public int no_recibo { get; set; }
@@ -32,5 +33,7 @@ namespace pipitos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<recolecta> recolecta { get; set; }
         public virtual donante donante { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComprobanteDesecho> ComprobanteDesecho { get; set; }
     }
 }

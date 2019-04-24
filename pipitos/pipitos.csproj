@@ -164,6 +164,7 @@
     <Content Include="catalogos\Rutas\funciones.js" />
     <Content Include="catalogos\Rutas\Index.aspx" />
     <Content Include="catalogos\Rutas\WebForm1.aspx" />
+    <Content Include="comprobanterecoleccion\agregardesecho.aspx" />
     <Content Include="comprobanterecoleccion\agregarmaterial.aspx" />
     <Content Include="comprobanterecoleccion\create.aspx" />
     <Content Include="comprobanterecoleccion\edit.aspx" />
@@ -1953,6 +1954,13 @@
     <Compile Include="catalogos\Rutas\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="comprobanterecoleccion\agregardesecho.aspx.cs">
+      <DependentUpon>agregardesecho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="comprobanterecoleccion\agregardesecho.aspx.designer.cs">
+      <DependentUpon>agregardesecho.aspx</DependentUpon>
+    </Compile>
     <Compile Include="comprobanterecoleccion\agregarmaterial.aspx.cs">
       <DependentUpon>agregarmaterial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2085,6 +2093,9 @@
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>pipitosmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComprobanteDesecho.cs">
       <DependentUpon>pipitosmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\comprobante_recoleccion.cs">

@@ -55,6 +55,7 @@ namespace pipitos.comprobanterecoleccion
                         txtenconceptode.Text = r.en_concepto_de;
                         //vamos a cargar el detalle del comprobante.
                         loaddetalle();
+                        loaddesechos();
                         //habilitamos botones del detalle
                         btnadddetalle.Enabled = true;
                         btnrefresh.Enabled = true;
@@ -136,9 +137,37 @@ namespace pipitos.comprobanterecoleccion
             }
         }
 
+        public void loaddesechos()
+        {
+            try
+            {
+                var recibo = int.Parse(txtrecibono.Text);
+                var desechos = (
+                    from d in bd.ComprobanteDesecho
+                    join m in bd.material on d.idmaterial equals m.id_material
+                    where d.norecibo == recibo
+                    select new
+                    {
+                        d.iddesecho,
+                        m.nombre_material,
+                        d.cantidad,
+                        d.fecha
+                    }
+                ).ToList();
+
+               gvdesechos.DataSource = desechos;
+               gvdesechos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                modulo.ShowToastr(this, ex.Message.Replace("'", ""), "Sistema", "error");
+            }
+        }
+
         protected void btnrefresh_Click(object sender, EventArgs e)
         {
             loaddetalle();
+            loaddesechos();
         }
 
         [System.Web.Services.WebMethod]
@@ -178,7 +207,52 @@ namespace pipitos.comprobanterecoleccion
             }
         }
 
+        [System.Web.Services.WebMethod]
+        public static modulo.mensaje Deletedesecho(int iddesecho)
+        {
+            try
+            {
+                pipitosEntities bd = new pipitosEntities();
+                var r = bd.ComprobanteDesecho.Find(iddesecho);
+                if (r == null)
+                {
+                    return new modulo.mensaje
+                    {
+                        texto = "El registro que desea eliminar no esta disponible",
+                        tipo = "error"
+                    };
+                }
+                //vamos sumar la cantidad del desecho a la recolecta.
+                var recolecta = bd.recolecta.Where(c => c.no_recibo == r.norecibo && c.id_material == r.idmaterial).FirstOrDefault();
+                recolecta.cantidad = recolecta.cantidad + r.cantidad;
+                bd.Entry(recolecta).State = EntityState.Modified;
+                bd.ComprobanteDesecho.Remove(r);
+                bd.SaveChanges();
+                return new modulo.mensaje
+                {
+                    texto = "El registro se elimino exitosamente",
+                    tipo = "success"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new modulo.mensaje
+                {
+                    texto = ex.Message,
+                    tipo = "error"
+                };
+            }
+        }
+
         protected void gvdetalle_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
+            }
+        }
+
+        protected void gvdesechos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             for (int i = 0; i < e.Row.Cells.Count; i++)
             {

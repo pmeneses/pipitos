@@ -35,6 +35,7 @@ namespace pipitos.comprobanterecoleccion
                 cbdonantes.DataTextField = "nombre_donante";
                 cbdonantes.DataBind();
                 loaddetalle();
+                loaddesechos();
             }
         }
 
@@ -60,6 +61,33 @@ namespace pipitos.comprobanterecoleccion
                 gvdetalle.DataBind();
             }
             catch(Exception ex)
+            {
+                modulo.ShowToastr(this, ex.Message.Replace("'", ""), "Sistema", "error");
+            }
+        }
+
+        public void loaddesechos()
+        {
+            try
+            {
+                var recibo = int.Parse(txtrecibono.Text == "" ? "0" : txtrecibono.Text);
+                var desechos = (
+                    from d in bd.ComprobanteDesecho
+                    join m in bd.material on d.idmaterial equals m.id_material
+                    where d.norecibo == recibo
+                    select new
+                    {
+                        d.iddesecho,
+                        m.nombre_material,
+                        d.cantidad,
+                        d.fecha
+                    }
+                ).ToList();
+
+                gvdesechos.DataSource = desechos;
+                gvdesechos.DataBind();
+            }
+            catch (Exception ex)
             {
                 modulo.ShowToastr(this, ex.Message.Replace("'", ""), "Sistema", "error");
             }
@@ -109,9 +137,18 @@ namespace pipitos.comprobanterecoleccion
         protected void btnrefresh_Click(object sender, EventArgs e)
         {
             loaddetalle();
+            loaddesechos();
         }
 
         protected void gvdetalle_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            for (int i = 0; i < e.Row.Cells.Count; i++)
+            {
+                e.Row.Cells[i].ToolTip = e.Row.Cells[i].Text;
+            }
+        }
+
+        protected void gvdesechos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             for (int i = 0; i < e.Row.Cells.Count; i++)
             {

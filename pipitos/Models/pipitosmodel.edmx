@@ -83,6 +83,16 @@
           <Property Name="id_donante" Type="int" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="ComprobanteDesecho">
+          <Key>
+            <PropertyRef Name="iddesecho" />
+          </Key>
+          <Property Name="iddesecho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="norecibo" Type="int" Nullable="false" />
+          <Property Name="idmaterial" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="contacto">
           <Key>
             <PropertyRef Name="id_contacto" />
@@ -313,6 +323,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ComprobanteDesecho_comprobante_recoleccion">
+          <End Role="comprobante_recoleccion" Type="Self.comprobante_recoleccion" Multiplicity="1" />
+          <End Role="ComprobanteDesecho" Type="Self.ComprobanteDesecho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comprobante_recoleccion">
+              <PropertyRef Name="no_recibo" />
+            </Principal>
+            <Dependent Role="ComprobanteDesecho">
+              <PropertyRef Name="norecibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprobanteDesecho_material">
+          <End Role="material" Type="Self.material" Multiplicity="1" />
+          <End Role="ComprobanteDesecho" Type="Self.ComprobanteDesecho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="ComprobanteDesecho">
+              <PropertyRef Name="idmaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -461,6 +495,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comprobante_recoleccion" EntityType="Self.comprobante_recoleccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComprobanteDesecho" EntityType="Self.ComprobanteDesecho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="donante" EntityType="Self.donante" Schema="dbo" store:Type="Tables" />
@@ -506,6 +541,14 @@
           <AssociationSet Name="FK_comprobante_recoleccion_donante" Association="Self.FK_comprobante_recoleccion_donante">
             <End Role="donante" EntitySet="donante" />
             <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprobanteDesecho_comprobante_recoleccion" Association="Self.FK_ComprobanteDesecho_comprobante_recoleccion">
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+            <End Role="ComprobanteDesecho" EntitySet="ComprobanteDesecho" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprobanteDesecho_material" Association="Self.FK_ComprobanteDesecho_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="ComprobanteDesecho" EntitySet="ComprobanteDesecho" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -655,6 +698,7 @@
           <Property Name="unidad_medida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="precio_unitario" Type="Int32" />
           <NavigationProperty Name="recolecta" Relationship="Self.FK__recolecta__id_ma__21B6055D" FromRole="material" ToRole="recolecta" />
+          <NavigationProperty Name="ComprobanteDesecho" Relationship="pipitosModel.FK_ComprobanteDesecho_material" FromRole="material" ToRole="ComprobanteDesecho" />
         </EntityType>
         <EntityType Name="periocidad">
           <Key>
@@ -916,6 +960,15 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="ComprobanteDesecho" EntityType="pipitosModel.ComprobanteDesecho" />
+          <AssociationSet Name="FK_ComprobanteDesecho_comprobante_recoleccion" Association="pipitosModel.FK_ComprobanteDesecho_comprobante_recoleccion">
+            <End Role="comprobante_recoleccion" EntitySet="comprobante_recoleccion" />
+            <End Role="ComprobanteDesecho" EntitySet="ComprobanteDesecho" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComprobanteDesecho_material" Association="pipitosModel.FK_ComprobanteDesecho_material">
+            <End Role="material" EntitySet="material" />
+            <End Role="ComprobanteDesecho" EntitySet="ComprobanteDesecho" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="comprobante_recoleccion">
           <Key>
@@ -931,6 +984,7 @@
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="recolecta" Relationship="pipitosModel.FK__recolecta__no_re__20C1E124" FromRole="comprobante_recoleccion" ToRole="recolecta" />
           <NavigationProperty Name="donante" Relationship="pipitosModel.FK_comprobante_recoleccion_donante" FromRole="comprobante_recoleccion" ToRole="donante" />
+          <NavigationProperty Name="ComprobanteDesecho" Relationship="pipitosModel.FK_ComprobanteDesecho_comprobante_recoleccion" FromRole="comprobante_recoleccion" ToRole="ComprobanteDesecho" />
         </EntityType>
         <Association Name="FK__recolecta__no_re__20C1E124">
           <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="0..1" />
@@ -1101,6 +1155,42 @@
         <Association Name="AspNetUserRoles">
           <End Type="pipitosModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="pipitosModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ComprobanteDesecho">
+          <Key>
+            <PropertyRef Name="iddesecho" />
+          </Key>
+          <Property Name="iddesecho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="norecibo" Type="Int32" Nullable="false" />
+          <Property Name="idmaterial" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="comprobante_recoleccion" Relationship="pipitosModel.FK_ComprobanteDesecho_comprobante_recoleccion" FromRole="ComprobanteDesecho" ToRole="comprobante_recoleccion" />
+          <NavigationProperty Name="material" Relationship="pipitosModel.FK_ComprobanteDesecho_material" FromRole="ComprobanteDesecho" ToRole="material" />
+        </EntityType>
+        <Association Name="FK_ComprobanteDesecho_comprobante_recoleccion">
+          <End Type="pipitosModel.comprobante_recoleccion" Role="comprobante_recoleccion" Multiplicity="1" />
+          <End Type="pipitosModel.ComprobanteDesecho" Role="ComprobanteDesecho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comprobante_recoleccion">
+              <PropertyRef Name="no_recibo" />
+            </Principal>
+            <Dependent Role="ComprobanteDesecho">
+              <PropertyRef Name="norecibo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComprobanteDesecho_material">
+          <End Type="pipitosModel.material" Role="material" Multiplicity="1" />
+          <End Type="pipitosModel.ComprobanteDesecho" Role="ComprobanteDesecho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="id_material" />
+            </Principal>
+            <Dependent Role="ComprobanteDesecho">
+              <PropertyRef Name="idmaterial" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1337,6 +1427,17 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ComprobanteDesecho">
+            <EntityTypeMapping TypeName="pipitosModel.ComprobanteDesecho">
+              <MappingFragment StoreEntitySet="ComprobanteDesecho">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idmaterial" ColumnName="idmaterial" />
+                <ScalarProperty Name="norecibo" ColumnName="norecibo" />
+                <ScalarProperty Name="iddesecho" ColumnName="iddesecho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

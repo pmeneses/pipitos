@@ -45,5 +45,6 @@ namespace pipitos.Models
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<variables> variables { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<ComprobanteDesecho> ComprobanteDesecho { get; set; }
     }
 }
